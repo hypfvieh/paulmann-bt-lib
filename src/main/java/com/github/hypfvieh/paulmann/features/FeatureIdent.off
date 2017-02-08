@@ -1,0 +1,54 @@
+package org.caseof.paulmann.features;
+
+/**
+ * Allow known features of Paulmann devices.
+ * This includes the UUID of the GATT service and characteristics.
+ * All enum values also provide the class which implements the feature behind the enum value.
+ *
+ * @author maniac
+ *
+ */
+public enum FeatureIdent {
+
+    PAULMANN_AUTOMOTIVE_INTERVAL_FEATURE("FFB0", "FFB1", BluetoothAutomotiveFeature.class),
+    PAULMANN_RGB_FEATURE("FFB0", "FFB2", null),
+    PAULMANN_SYSTEMTIME_FEATURE("FFB0", "FFB3", BluetoothSystemTimeFeature.class),
+    PAULMANN_ON_OFF_TIMER_WITH_OPTIONS_FEATURE("FFB0", "FFB4", BluetoothTimerOnOffWithOptionsFeature.class),
+
+    PAULMANN_COLORTEMP_FEATURE("FFB0", "FFB6", null),
+    PAULMANN_ON_OFF_FEATURE("FFB0","FFB7", BluetoothOnOffFeature.class),
+    PAULMANN_BRIGHTNESS_FEATURE("FFB0", "FFB8", BluetoothBrightnessFeature.class),
+    PAULMANN_WORKINGMODE_FEATURE("FFB0", "FFB9", null),
+    PAULMANN_DEVICE_PASSWORD_FEATURE("FFB0", "FFBA", BluetoothDevicePasswordFeature.class),
+    PAULMANN_REMOTECONTROLMODE_FEATURE("FFB0", "FFBB", BluetoothRemoteControlModeFeature.class),
+    ;
+
+    public static final String UUID_BASE = "0000XXXX-0000-1000-8000-00805f9b34fb";
+
+    private final String serviceId;
+    private final String charId;
+    private final Class<? extends AbstractBluetoothFeature> deviceClass;
+
+    private FeatureIdent(String _serviceId, String _charId, Class<? extends AbstractBluetoothFeature> _deviceClass) {
+        serviceId = createUUID(_serviceId);
+        charId = createUUID(_charId);
+        deviceClass = _deviceClass;
+    }
+
+    private static String createUUID(String _uuidPart) {
+        return UUID_BASE.replace("XXXX", _uuidPart);
+    }
+
+    public String getServiceId() {
+        return serviceId;
+    }
+
+    public String getCharId() {
+        return charId;
+    }
+
+    public Class<? extends AbstractBluetoothFeature> getDeviceClass() {
+        return deviceClass;
+    }
+
+}
