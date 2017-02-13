@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
+import org.freedesktop.dbus.AbstractPropertiesHandler;
 import org.freedesktop.dbus.exceptions.DBusException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -160,6 +161,22 @@ public class PaulmannDeviceController {
         }
 
         return devLst;
+    }
+
+    /**
+     * Registers a PropertyChange callback.
+     *
+     * @param _handler
+     * @return true if callback could be registered, false otherwise
+     */
+    public boolean registerPropertyHandler(AbstractPropertiesHandler _handler) {
+        try {
+            manager.registerPropertyHandler(_handler);
+            return true;
+        } catch (DBusException _ex) {
+            logger.info("Could not register PropertiesChanged callback", _ex);
+            return false;
+        }
     }
 
     /**
