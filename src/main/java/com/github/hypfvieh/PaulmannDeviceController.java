@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
+import org.bluez.exceptions.BluezDoesNotExistsException;
 import org.freedesktop.dbus.AbstractPropertiesHandler;
 import org.freedesktop.dbus.exceptions.DBusException;
 import org.slf4j.Logger;
@@ -61,6 +62,7 @@ public class PaulmannDeviceController {
 
     /**
      * Returns a list of all found bluetooth adapters.
+     * 
      * @return
      */
     public static List<BluetoothAdapter> getBluetoothAdapters() {
@@ -80,7 +82,7 @@ public class PaulmannDeviceController {
         }
 
         logger.debug("Scanning for bluetooth devices for {} seconds", timeout);
-        manager.scanForBluetoothDevices(timeout*1000);
+        manager.scanForBluetoothDevices(timeout * 1000);
         logger.debug("Scanning for bluetooth devices has finished");
     }
 
@@ -120,6 +122,7 @@ public class PaulmannDeviceController {
 
     /**
      * Returns a list of all devices which could be managed by {@link PaulmannDeviceController}.
+     * 
      * @return
      */
     public Map<String, AbstractPaulmannDevice> getDevices() {
@@ -141,6 +144,16 @@ public class PaulmannDeviceController {
             }
             devices.clear();
         }
+    }
+
+    /**
+     * Setup the default bluetooth adapter to use.
+     *
+     * @param _macAddress
+     * @throws BluezDoesNotExistsException
+     */
+    public void setDefaultBluetoothAdapter(String _macAddress) throws BluezDoesNotExistsException {
+        manager.setDefaultAdapter(_macAddress);
     }
 
     /**
@@ -307,9 +320,10 @@ public class PaulmannDeviceController {
 
         @Override
         public String toString() {
-            return "DeviceDetails [macAddr=" + macAddr + ", name=" + name + ", supported=" + supported + ", alias=" + alias + ", modAlias="
-                    + modAlias + ", appearance=" + appearance + ", btClass=" + btClass + ", uuids=" + uuids
-                    + ", servicesAndCharacteristics=" + servicesAndCharacteristics + ", error=" + error + "]";
+            return "DeviceDetails [macAddr=" + macAddr + ", name=" + name + ", supported=" + supported + ", alias="
+                    + alias + ", modAlias=" + modAlias + ", appearance=" + appearance + ", btClass=" + btClass
+                    + ", uuids=" + uuids + ", servicesAndCharacteristics=" + servicesAndCharacteristics + ", error="
+                    + error + "]";
         }
     }
 }
