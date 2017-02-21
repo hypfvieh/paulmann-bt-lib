@@ -36,6 +36,17 @@ public abstract class AbstractBluetoothStringValFeature extends AbstractBluetoot
     }
 
     /**
+     * Use cached write to send the value.
+     * @see AbstractBluetoothFeature#writeCached(byte[])
+     * @param _value
+     */
+    public void writeCached(String _value) {
+        if (_value != null) {
+            writeCached(_value.getBytes(StandardCharsets.US_ASCII));
+        }
+    }
+
+    /**
      * Read a string.
      * @return the read string, maybe null or empty
      */

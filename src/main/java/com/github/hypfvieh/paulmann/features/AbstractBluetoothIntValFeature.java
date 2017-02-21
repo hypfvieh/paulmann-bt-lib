@@ -18,11 +18,31 @@ public abstract class AbstractBluetoothIntValFeature extends AbstractBluetoothFe
 
     /**
      * Write a byte value.
-     * Includes checking for min/max values and stepsize.
      * @param _value
      * @return true on successful write, false otherwise
      */
     public boolean writeByte(byte _value) {
+        _value = validateValue(_value);
+
+        return writeValue(byteToByteArray(_value));
+    }
+
+    /**
+     * Use cached write to send the value.
+     * @see AbstractBluetoothFeature#writeCached(byte[])
+     * @param _value
+     */
+    public void writeCached(byte _value) {
+        _value = validateValue(_value);
+        writeCached(byteToByteArray(_value));
+    }
+
+    /**
+     * Validates the given value for min/max values and stepsize.
+     * @param _value
+     * @return
+     */
+    private byte validateValue(byte _value) {
         // range check, only send allowed values
         if (_value > getMaxValue()) {
             _value = getMaxValue();
@@ -33,9 +53,10 @@ public abstract class AbstractBluetoothIntValFeature extends AbstractBluetoothFe
         if (_value % getStepSize() != 0) { // value is not divisible by stepsize, fix number
             _value = ((byte) (_value / getStepSize()));
         }
-
-        return writeValue(byteToByteArray(_value));
+        return _value;
     }
+
+
 
     /**
      * Read a byte from the GATT characteristics.

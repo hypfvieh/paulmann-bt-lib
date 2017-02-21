@@ -1,5 +1,10 @@
 package com.github.hypfvieh.paulmann.features;
 
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,7 +15,7 @@ import com.github.hypfvieh.bluetooth.wrapper.BluetoothGattService;
 /**
  * Base class of all 'features' a Paulmann bluetooth device can have.
  *
- * @author maniac
+ * @author David M.
  */
 public abstract class AbstractBluetoothFeature {
 
@@ -23,6 +28,9 @@ public abstract class AbstractBluetoothFeature {
 
     private Exception lastError;
 
+    private List<byte[]> cachedWrites = new CopyOnWriteArrayList<>();
+    private Timer cacheWriteTimer;
+
     protected AbstractBluetoothFeature(BluetoothGattCharacteristic _characteristic) {
         characteristic = _characteristic;
         device = _characteristic.getService().getDevice();
@@ -31,6 +39,42 @@ public abstract class AbstractBluetoothFeature {
 
     protected BluetoothGattCharacteristic getCharacteristic() {
         return characteristic;
+    }
+
+    /**
+     * Caches write operations and will only send the last received write operation.
+     * This can be used to avoid flooding the bluetooth device with commands it could not handle at that speed
+     * (which could lead to weird behaviors when using e.g. light dimming features).
+     * @param _value
+     */
+    public void writeCached(byte[] _value) {
+        if (_value != null) {
+            cachedWrites.add(_value);
+        }
+
+        if (cacheWriteTimer != null) { // already having a send timer, cancel it and start new
+            cacheWriteTimer.cancel();
+        }
+        cacheWriteTimer = new Timer();
+        cacheWriteTimer.schedule(createCachedSendTask(), 200L);
+    }
+
+    /**
+     * Creates a timer taks to send the last entry of the cached command queue.
+     * @return
+     */
+    private TimerTask createCachedSendTask() {
+        return new TimerTask() {
+
+            @Override
+            public void run() {
+                byte[] bs = cachedWrites.get(cachedWrites.size() -1);
+                writeValue(bs);
+                cachedWrites.clear(); // remove all cached entries
+                cacheWriteTimer.cancel(); // cancel the timer - this is the last command to execute
+                cacheWriteTimer = null; // reset global timer variable
+            }
+        };
     }
 
     /**
