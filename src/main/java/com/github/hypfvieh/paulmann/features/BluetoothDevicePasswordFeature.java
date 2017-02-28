@@ -8,7 +8,6 @@ public class BluetoothDevicePasswordFeature extends AbstractBluetoothStringValFe
 
     public BluetoothDevicePasswordFeature(BluetoothGattCharacteristic _char) {
         super(_char);
-        setFeatureIdent(FeatureIdent.PAULMANN_ON_OFF_FEATURE);
     }
 
     /**
@@ -26,6 +25,14 @@ public class BluetoothDevicePasswordFeature extends AbstractBluetoothStringValFe
 
     public boolean isAuthenticated() {
         return authenticated;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public FeatureIdent<?> getFeatureIdent() {
+        return FeatureIdent.PAULMANN_DEVICE_PASSWORD_FEATURE;
     }
 
 }

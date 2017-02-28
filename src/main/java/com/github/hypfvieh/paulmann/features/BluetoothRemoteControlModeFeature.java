@@ -6,7 +6,6 @@ public class BluetoothRemoteControlModeFeature extends AbstractBluetoothIntValFe
 
     public BluetoothRemoteControlModeFeature(BluetoothGattCharacteristic _char) {
         super(_char);
-        setFeatureIdent(FeatureIdent.PAULMANN_REMOTECONTROLMODE_FEATURE);
     }
 
     /**
@@ -39,6 +38,14 @@ public class BluetoothRemoteControlModeFeature extends AbstractBluetoothIntValFe
     @Override
     public byte getMaxValue() {
         return 1;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public FeatureIdent<?> getFeatureIdent() {
+        return FeatureIdent.PAULMANN_REMOTECONTROLMODE_FEATURE;
     }
 
 }

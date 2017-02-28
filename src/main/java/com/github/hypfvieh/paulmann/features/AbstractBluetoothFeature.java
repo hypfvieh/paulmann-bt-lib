@@ -19,12 +19,13 @@ import com.github.hypfvieh.bluetooth.wrapper.BluetoothGattService;
  */
 public abstract class AbstractBluetoothFeature {
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+    // CHECKSTYLE:OFF
+    protected final Logger logger = LoggerFactory.getLogger(getClass());
+    // CHECKSTYLE:ON
 
     private final BluetoothDevice device;
     private final BluetoothGattService gattService;
     private BluetoothGattCharacteristic characteristic;
-    private FeatureIdent<?> featureIdent;
 
     private Exception lastError;
 
@@ -45,6 +46,7 @@ public abstract class AbstractBluetoothFeature {
      * Caches write operations and will only send the last received write operation.
      * This can be used to avoid flooding the bluetooth device with commands it could not handle at that speed
      * (which could lead to weird behaviors when using e.g. light dimming features).
+     *
      * @param _value
      */
     public void writeCached(byte[] _value) {
@@ -61,6 +63,7 @@ public abstract class AbstractBluetoothFeature {
 
     /**
      * Creates a timer taks to send the last entry of the cached command queue.
+     *
      * @return
      */
     private TimerTask createCachedSendTask() {
@@ -68,7 +71,7 @@ public abstract class AbstractBluetoothFeature {
 
             @Override
             public void run() {
-                byte[] bs = cachedWrites.get(cachedWrites.size() -1);
+                byte[] bs = cachedWrites.get(cachedWrites.size() - 1);
                 writeValue(bs);
                 cachedWrites.clear(); // remove all cached entries
                 cacheWriteTimer.cancel(); // cancel the timer - this is the last command to execute
@@ -124,23 +127,7 @@ public abstract class AbstractBluetoothFeature {
         }
     }
 
-    /**
-     * FeatureIdent enum value which will be implemented by the concrete class.
-     *
-     * @return
-     */
-    public FeatureIdent<?> getFeatureIdent() {
-        return featureIdent;
-    }
-
-    /**
-     * Set the featureIdent.
-     *
-     * @param _featureIdent
-     */
-    protected void setFeatureIdent(FeatureIdent<?> _featureIdent) {
-        featureIdent = _featureIdent;
-    }
+    public abstract FeatureIdent<?> getFeatureIdent();
 
     /**
      * Establish a connection to the device, if not already existing.

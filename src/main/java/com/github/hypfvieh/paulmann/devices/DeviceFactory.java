@@ -11,7 +11,8 @@ import com.github.hypfvieh.bluetooth.wrapper.BluetoothGattService;
 
 /**
  * Factory to create Paulmann Device class instances based on the given GATT Service.
- * @author maniac
+ *
+ * @author David M.
  *
  */
 public class DeviceFactory {

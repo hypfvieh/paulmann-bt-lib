@@ -6,7 +6,6 @@ public class BluetoothSystemTimeFeature extends AbstractBluetoothIntValFeature {
 
     public BluetoothSystemTimeFeature(BluetoothGattCharacteristic _char) {
         super(_char);
-        setFeatureIdent(FeatureIdent.PAULMANN_SYSTEMTIME_FEATURE);
     }
 
     /**
@@ -39,6 +38,14 @@ public class BluetoothSystemTimeFeature extends AbstractBluetoothIntValFeature {
     @Override
     public byte getMaxValue() {
         return 1;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public FeatureIdent<?> getFeatureIdent() {
+        return FeatureIdent.PAULMANN_SYSTEMTIME_FEATURE;
     }
 
 }

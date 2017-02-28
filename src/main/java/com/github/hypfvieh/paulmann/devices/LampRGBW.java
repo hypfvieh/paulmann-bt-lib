@@ -6,7 +6,7 @@ import com.github.hypfvieh.paulmann.features.FeatureIdent;
 /**
  * Concrete PaulmannDevice which describes a RGB-W (RGB plus white) LED stripe.
  *
- * @author maniac
+ * @author David M.
  */
 public class LampRGBW extends AbstractPaulmannDevice {
     public static final FeatureIdent<?>[] SUPPORTED_FEATURES = {
@@ -20,7 +20,7 @@ public class LampRGBW extends AbstractPaulmannDevice {
             FeatureIdent.PAULMANN_WORKINGMODE_FEATURE,
             FeatureIdent.PAULMANN_REMOTECONTROLMODE_FEATURE,
             FeatureIdent.PAULMANN_DEVICE_PASSWORD_FEATURE
-            };
+    };
 
     public static final String DEVICE_ALIAS = "Lamp-RGBW";
 

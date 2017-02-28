@@ -3,7 +3,7 @@ package com.github.hypfvieh.paulmann.devices;
 /**
  * Categories of Paulmann devices.
  *
- * @author maniac
+ * @author David M.
  *
  */
 public enum DeviceCategory {

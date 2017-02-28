@@ -6,7 +6,6 @@ public class BluetoothOnOffFeature extends AbstractBluetoothIntValFeature {
 
     public BluetoothOnOffFeature(BluetoothGattCharacteristic _char) {
         super(_char);
-        setFeatureIdent(FeatureIdent.PAULMANN_ON_OFF_FEATURE);
     }
 
     public boolean toggle(boolean _turnOn) {
@@ -47,6 +46,14 @@ public class BluetoothOnOffFeature extends AbstractBluetoothIntValFeature {
     @Override
     public byte getMaxValue() {
         return 1;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public FeatureIdent<?> getFeatureIdent() {
+        return FeatureIdent.PAULMANN_ON_OFF_FEATURE;
     }
 
 }

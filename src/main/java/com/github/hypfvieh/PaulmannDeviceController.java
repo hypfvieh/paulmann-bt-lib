@@ -30,7 +30,7 @@ import com.github.hypfvieh.paulmann.devices.LampWC;
 /**
  * Main class for management of all supported bluetooth devices.
  *
- * @author maniac
+ * @author David M.
  *
  */
 public class PaulmannDeviceController {
@@ -62,7 +62,7 @@ public class PaulmannDeviceController {
 
     /**
      * Returns a list of all found bluetooth adapters.
-     * 
+     *
      * @return
      */
     public static List<BluetoothAdapter> getBluetoothAdapters() {
@@ -122,7 +122,7 @@ public class PaulmannDeviceController {
 
     /**
      * Returns a list of all devices which could be managed by {@link PaulmannDeviceController}.
-     * 
+     *
      * @return
      */
     public Map<String, AbstractPaulmannDevice> getDevices() {
@@ -195,7 +195,7 @@ public class PaulmannDeviceController {
     /**
      * Meta-Information class with all read properties of a bluetooth device.
      *
-     * @author maniac
+     * @author David M.
      */
     public static class DeviceDetails {
         private String macAddr;

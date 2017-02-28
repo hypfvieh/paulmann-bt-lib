@@ -6,7 +6,7 @@ import com.github.hypfvieh.paulmann.features.FeatureIdent;
 /**
  * Concrete PaulmannDevice which describes a white/warm-white LED stripe.
  *
- * @author maniac
+ * @author David M.
  */
 public class LampW extends AbstractPaulmannDevice {
     public static final FeatureIdent<?>[] SUPPORTED_FEATURES = {
@@ -16,7 +16,7 @@ public class LampW extends AbstractPaulmannDevice {
             FeatureIdent.PAULMANN_REMOTECONTROLMODE_FEATURE,
             FeatureIdent.PAULMANN_ON_OFF_TIMER_WITH_OPTIONS_FEATURE,
             FeatureIdent.PAULMANN_DEVICE_PASSWORD_FEATURE
-            };
+    };
 
     public static final String DEVICE_ALIAS = "Lamp-W";
 

@@ -6,7 +6,7 @@ import com.github.hypfvieh.paulmann.features.FeatureIdent;
 /**
  * Concrete PaulmannDevice which describes a white LED stripe with color temperature support.
  *
- * @author maniac
+ * @author David M.
  */
 public class LampWC extends AbstractPaulmannDevice {
     public static final FeatureIdent<?>[] SUPPORTED_FEATURES = {

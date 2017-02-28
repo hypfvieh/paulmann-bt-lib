@@ -13,7 +13,7 @@ import com.github.hypfvieh.paulmann.devices.AbstractPaulmannDevice;
  * Sadly using enum would prevent deny the proper usage of generics in {@link AbstractPaulmannDevice},
  * so the 'poor-mans' enum is used.
  *
- * @author maniac
+ * @author David M.
  *
  */
 public final class FeatureIdent<T extends AbstractBluetoothFeature> {
@@ -22,15 +22,14 @@ public final class FeatureIdent<T extends AbstractBluetoothFeature> {
 
     public static final FeatureIdent<BluetoothAutomotiveFeature> PAULMANN_AUTOMOTIVE_INTERVAL_FEATURE = new FeatureIdent<>(
             "FFB0", "FFB1", BluetoothAutomotiveFeature.class, "PAULMANN_AUTOMOTIVE_INTERVAL_FEATURE");
-    public static final FeatureIdent<?> PAULMANN_RGB_FEATURE = new FeatureIdent<>("FFB0", "FFB2", null,
-            "PAULMANN_RGB_FEATURE");
+    public static final FeatureIdent<BluetoothRgbFeature> PAULMANN_RGB_FEATURE = new FeatureIdent<>("FFB0", "FFB2",
+            BluetoothRgbFeature.class, "PAULMANN_RGB_FEATURE");
     public static final FeatureIdent<BluetoothSystemTimeFeature> PAULMANN_SYSTEMTIME_FEATURE = new FeatureIdent<>(
             "FFB0", "FFB3", BluetoothSystemTimeFeature.class, "PAULMANN_SYSTEMTIME_FEATURE");
     public static final FeatureIdent<BluetoothTimerOnOffWithOptionsFeature> PAULMANN_ON_OFF_TIMER_WITH_OPTIONS_FEATURE = new FeatureIdent<>(
             "FFB0", "FFB4", BluetoothTimerOnOffWithOptionsFeature.class, "PAULMANN_ON_OFF_TIMER_WITH_OPTIONS_FEATURE");
-
-    public static final FeatureIdent<?> PAULMANN_COLORTEMP_FEATURE = new FeatureIdent<>("FFB0", "FFB6", null,
-            "PAULMANN_COLORTEMP_FEATURE");
+    public static final FeatureIdent<BluetoothColorTemperatureFeature> PAULMANN_COLORTEMP_FEATURE = new FeatureIdent<>(
+            "FFB0", "FFB6", BluetoothColorTemperatureFeature.class, "PAULMANN_COLORTEMP_FEATURE");
     public static final FeatureIdent<BluetoothOnOffFeature> PAULMANN_ON_OFF_FEATURE = new FeatureIdent<>("FFB0", "FFB7",
             BluetoothOnOffFeature.class, "PAULMANN_ON_OFF_FEATURE");
     public static final FeatureIdent<BluetoothBrightnessFeature> PAULMANN_BRIGHTNESS_FEATURE = new FeatureIdent<>(

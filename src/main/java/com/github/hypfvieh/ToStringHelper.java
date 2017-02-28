@@ -10,10 +10,9 @@ import com.github.hypfvieh.bluetooth.wrapper.BluetoothGattService;
 /**
  * Helper class for some more useful toString() implementations.
  *
- * @author maniac
+ * @author David M.
  */
 public class ToStringHelper {
-
 
     /**
      * Read key information from {@link BluetoothDevice} and return it as String.

@@ -4,10 +4,8 @@ import com.github.hypfvieh.bluetooth.wrapper.BluetoothGattCharacteristic;
 
 public class BluetoothBrightnessFeature extends AbstractBluetoothIntValFeature {
 
-
     public BluetoothBrightnessFeature(BluetoothGattCharacteristic _char) {
         super(_char);
-        setFeatureIdent(FeatureIdent.PAULMANN_BRIGHTNESS_FEATURE);
     }
 
     /**
@@ -43,6 +41,14 @@ public class BluetoothBrightnessFeature extends AbstractBluetoothIntValFeature {
     public byte getMaxValue() {
         // TODO Auto-generated method stub
         return 100;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public FeatureIdent<?> getFeatureIdent() {
+        return FeatureIdent.PAULMANN_BRIGHTNESS_FEATURE;
     }
 
 }

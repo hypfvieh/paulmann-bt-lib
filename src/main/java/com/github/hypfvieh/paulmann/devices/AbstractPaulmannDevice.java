@@ -17,7 +17,7 @@ import com.github.hypfvieh.paulmann.features.FeatureIdent;
 /**
  * Base class of all Paulmann devices.
  *
- * @author maniac
+ * @author David M.
  *
  */
 public abstract class AbstractPaulmannDevice {

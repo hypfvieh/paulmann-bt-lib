@@ -9,7 +9,7 @@ import com.github.hypfvieh.bluetooth.wrapper.BluetoothGattService;
 /**
  * Factory to create all features of Paulmann device.
  *
- * @author maniac
+ * @author David M.
  *
  */
 public class BluetoothFeatureFactory {

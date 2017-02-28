@@ -3,9 +3,10 @@ package com.github.hypfvieh.paulmann.features;
 import com.github.hypfvieh.bluetooth.wrapper.BluetoothGattCharacteristic;
 
 /**
- * Abstraction for all Paulmann bluetooth features which where Integer based (characteristics only supports byte values).
+ * Abstraction for all Paulmann bluetooth features which were Integer based (characteristics only supports byte
+ * values).
  *
- * @author maniac
+ * @author hypfvieh
  *
  */
 public abstract class AbstractBluetoothIntValFeature extends AbstractBluetoothFeature {
@@ -18,6 +19,7 @@ public abstract class AbstractBluetoothIntValFeature extends AbstractBluetoothFe
 
     /**
      * Write a byte value.
+     *
      * @param _value
      * @return true on successful write, false otherwise
      */
@@ -29,6 +31,7 @@ public abstract class AbstractBluetoothIntValFeature extends AbstractBluetoothFe
 
     /**
      * Use cached write to send the value.
+     *
      * @see AbstractBluetoothFeature#writeCached(byte[])
      * @param _value
      */
@@ -39,6 +42,7 @@ public abstract class AbstractBluetoothIntValFeature extends AbstractBluetoothFe
 
     /**
      * Validates the given value for min/max values and stepsize.
+     *
      * @param _value
      * @return
      */
@@ -56,10 +60,9 @@ public abstract class AbstractBluetoothIntValFeature extends AbstractBluetoothFe
         return _value;
     }
 
-
-
     /**
      * Read a byte from the GATT characteristics.
+     *
      * @return byte or value of ERROR_RETURN if error occours
      */
     public byte readByte() {
@@ -73,30 +76,35 @@ public abstract class AbstractBluetoothIntValFeature extends AbstractBluetoothFe
 
     /**
      * StepSize used for all values.
+     *
      * @return
      */
     public abstract byte getStepSize();
 
     /**
      * Default value.
+     *
      * @return
      */
     public abstract byte getDefaultValue();
 
     /**
      * Minimum allowed value.
+     *
      * @return
      */
     public abstract byte getMinValue();
 
     /**
      * Maximum allowed value.
+     *
      * @return
      */
     public abstract byte getMaxValue();
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + " [defaultValue=" + getDefaultValue() + ", minValue=" + getMinValue() + ", maxValue=" + getMaxValue() + "]";
+        return getClass().getSimpleName() + " [defaultValue=" + getDefaultValue() + ", minValue=" + getMinValue()
+                + ", maxValue=" + getMaxValue() + "]";
     }
 }

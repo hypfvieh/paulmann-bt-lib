@@ -7,7 +7,7 @@ import com.github.hypfvieh.bluetooth.wrapper.BluetoothGattCharacteristic;
 /**
 * Abstraction for all Paulmann bluetooth features which were String based (characteristics supports (ASCII) String values).
 *
-* @author maniac
+* @author David M.
 *
 */
 public abstract class AbstractBluetoothStringValFeature extends AbstractBluetoothFeature {
