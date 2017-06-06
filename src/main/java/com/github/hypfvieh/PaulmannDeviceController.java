@@ -40,6 +40,7 @@ public class PaulmannDeviceController {
             new String[] { LampW.DEVICE_ALIAS, LampRGB.DEVICE_ALIAS, LampWC.DEVICE_ALIAS, LampRGBW.DEVICE_ALIAS });
 
     public static final int DEFAULT_SCAN_TIMEOUT_SEC = 10;
+    private static final List<BluetoothAdapter> BT_ADAPTER_LIST = new ArrayList<>();
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -62,13 +63,30 @@ public class PaulmannDeviceController {
 
     /**
      * Returns a list of all found bluetooth adapters.
-     *
+     * Uses the cached list of adapters if called more than once.
+     * If you want to refresh the internal list use {@link #getBluetoothAdapters(boolean)}.
      * @return
      */
     public static List<BluetoothAdapter> getBluetoothAdapters() {
-        return getInstance().manager.getAdapters();
+        return getBluetoothAdapters(false);
     }
 
+    /**
+     * Returns a list of all found bluetooth adapters either from cache or retrieves a new list from Dbus.
+     * If _refresh is true, will always gather list from Dbus, otherwise will 
+     * use the internal cached list if the list is not empty.
+     * 
+     * @param _refresh true to get a new list from Dbus, false otherwise
+     * @return
+     */
+    public static List<BluetoothAdapter> getBluetoothAdapters(boolean _refresh) {
+        if (!_refresh && !BT_ADAPTER_LIST.isEmpty()) {
+            return BT_ADAPTER_LIST;
+        }
+        BT_ADAPTER_LIST.addAll(getInstance().manager.getAdapters());
+        return BT_ADAPTER_LIST;
+    }
+    
     /**
      * Scan for bluetooth devices for _timeout seconds.
      *
@@ -144,6 +162,7 @@ public class PaulmannDeviceController {
             }
             devices.clear();
         }
+        manager.closeConnection();
     }
 
     /**
