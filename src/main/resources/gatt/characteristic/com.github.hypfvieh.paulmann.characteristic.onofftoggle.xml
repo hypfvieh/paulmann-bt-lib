@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Characteristic xsi:noNamespaceSchemaLocation="http://schemas.bluetooth.org/Documents/characteristic.xsd"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Paulmann OnOff Toggle"
+                type="com.github.hypfvieh.paulmann.characteristic.onofftoggle" uuid="FFB7" last-modified="2017-03-01"
+                approved="No">
+    <InformativeText>
+        <Summary>On/Off toggle feature of Paulmann LED Stripe bluetooth LE actor.
+        </Summary>
+    </InformativeText>
+
+	<Value>
+		<Field name="OnOffToggle">
+			<InformativeText>
+				Toggle LED stripe On/Off
+			</InformativeText>
+			<Requirement>Mandatory</Requirement>
+			<Format>boolean</Format>
+		</Field>
+	</Value>
+</Characteristic>

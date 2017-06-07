@@ -68,7 +68,7 @@ public class PaulmannDeviceController {
      * @return
      */
     public static List<BluetoothAdapter> getBluetoothAdapters() {
-        return getBluetoothAdapters(false);
+        return getInstance().manager.getAdapters();
     }
 
     /**

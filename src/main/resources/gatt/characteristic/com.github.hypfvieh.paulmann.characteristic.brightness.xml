@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Characteristic xsi:noNamespaceSchemaLocation="http://schemas.bluetooth.org/Documents/characteristic.xsd"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Paulmann Brightness"
+                type="com.github.hypfvieh.paulmann.characteristic.brightness" uuid="FFB8" last-modified="2017-03-01"
+                approved="No">
+    <InformativeText>
+        <Summary>Brightness feature of Paulmann LED Stripe bluetooth LE actor.
+        </Summary>
+    </InformativeText>
+
+	<Value>
+		<Field name="Brightness">
+			<InformativeText>
+				Brightness of the LED stripe
+			</InformativeText>
+			<Requirement>Optional</Requirement>
+			<Format>8bit</Format>
+			<Minimum>10</Minimum>
+			<Maximum>100</Maximum>
+		</Field>
+	</Value>
+</Characteristic>

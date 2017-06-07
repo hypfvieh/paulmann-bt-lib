@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Characteristic xsi:noNamespaceSchemaLocation="http://schemas.bluetooth.org/Documents/characteristic.xsd"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Paulmann color temperature"
+                type="com.github.hypfvieh.paulmann.characteristic.colortemp" uuid="FFB6" last-modified="2017-03-01"
+                approved="No">
+    <InformativeText>
+        <Summary>Selection of predefined color temperatures
+        </Summary>
+    </InformativeText>
+
+	<Value>
+		<Field name="colorTemp">
+			<InformativeText>
+				Predefined color temperatures
+			</InformativeText>
+			<Requirement>Optional</Requirement>
+			<Enumerations>
+				<Enumeration value="Color Temp. 1" key="2700"/>
+				<Enumeration value="Color Temp. 2" key="3000"/>
+				<Enumeration value="Color Temp. 3" key="3500"/>
+				<Enumeration value="Color Temp. 4" key="4000"/>
+				<Enumeration value="Color Temp. 5" key="4500"/>
+				<Enumeration value="Color Temp. 6" key="5000"/>
+				<Enumeration value="Color Temp. 7" key="6500"/>
+			</Enumerations>
+		</Field>
+	</Value>
+</Characteristic>

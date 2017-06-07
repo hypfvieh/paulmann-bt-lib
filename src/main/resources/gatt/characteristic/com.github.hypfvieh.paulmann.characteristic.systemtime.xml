@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Characteristic xsi:noNamespaceSchemaLocation="http://schemas.bluetooth.org/Documents/characteristic.xsd"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Paulmann system time Feature"
+                type="com.github.hypfvieh.paulmann.characteristic.systemtime" uuid="FFB3" last-modified="2017-03-01"
+                approved="No">
+    <InformativeText>
+        <Summary>Set the current time and date on the device
+        </Summary>
+    </InformativeText>
+
+	<Value>
+		<Field name="yearRemainder">
+			<InformativeText>
+				Remainder of Year divided by 256
+			</InformativeText>
+			<Requirement>Mandatory</Requirement>
+			<Format>uint8</Format>
+		</Field>
+		<Field name="year">
+			<InformativeText>
+				Int value of year divided by 256
+			</InformativeText>
+			<Requirement>Mandatory</Requirement>
+			<Format>uint8</Format>
+			<BinaryExponent>-8</BinaryExponent>
+		</Field>
+		<Field name="month">
+			<InformativeText>
+				Month
+			</InformativeText>
+			<Requirement>Mandatory</Requirement>
+			<Format>uint8</Format>
+		</Field>
+		<Field name="day">
+			<InformativeText>
+				Day
+			</InformativeText>
+			<Requirement>Mandatory</Requirement>
+			<Format>uint8</Format>
+		</Field>
+		<Field name="hour">
+			<InformativeText>
+				Hour
+			</InformativeText>
+			<Requirement>Mandatory</Requirement>
+			<Format>uint8</Format>
+		</Field>
+		<Field name="minute">
+			<InformativeText>
+				Minute
+			</InformativeText>
+			<Requirement>Mandatory</Requirement>
+			<Format>uint8</Format>
+		</Field>
+		<Field name="second">
+			<InformativeText>
+				Second
+			</InformativeText>
+			<Requirement>Mandatory</Requirement>
+			<Format>uint8</Format>
+		</Field>
+
+	</Value>
+</Characteristic>

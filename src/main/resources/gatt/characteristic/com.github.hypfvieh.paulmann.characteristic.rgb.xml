@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Characteristic xsi:noNamespaceSchemaLocation="http://schemas.bluetooth.org/Documents/characteristic.xsd"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Paulmann RGB Feature"
+                type="com.github.hypfvieh.paulmann.characteristic.rgb" uuid="FFB2" last-modified="2017-03-01"
+                approved="No">
+    <InformativeText>
+        <Summary>Control of Paulmann RGB LED stripes.
+        </Summary>
+    </InformativeText>
+
+	<Value>
+		<Field name="colorRed">
+			<InformativeText>
+				Red color channel
+			</InformativeText>
+			<Requirement>Optional</Requirement>
+			<Format>uint8</Format>
+		</Field>
+		<Field name="colorGreen">
+			<InformativeText>
+				Green color channel
+			</InformativeText>
+			<Requirement>Optional</Requirement>
+			<Format>uint8</Format>
+		</Field>
+		<Field name="colorBlue">
+			<InformativeText>
+				Blue color channel
+			</InformativeText>
+			<Requirement>Optional</Requirement>
+			<Format>uint8</Format>
+		</Field>
+	</Value>
+</Characteristic>

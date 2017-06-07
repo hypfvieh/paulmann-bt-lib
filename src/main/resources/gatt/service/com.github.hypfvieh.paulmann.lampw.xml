@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Service xsi:noNamespaceSchemaLocation="http://schemas.bluetooth.org/Documents/service.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Paulmann Lamp-W Device Service"
+	type="com.github.hypfvieh.paulmann.service.lampw" uuid="FFB0">
+	<InformativeText>
+		<Abstract>
+            Paulmann Lamp-W Device
+        </Abstract>
+		<Summary>
+            Paulmann Lamp-W Device
+        </Summary>
+	</InformativeText>
+	<Dependencies>
+		<Dependency>This service has no dependencies on other GATT-based services.</Dependency>
+	</Dependencies>
+	<Characteristics>
+
+		<Characteristic name="Paulmann Device password Feature"
+						type="com.github.hypfvieh.paulmann.characteristic.devicepassword">
+			<InformativeText>
+				Paulmann device password feature
+			</InformativeText>
+			<Requirement>Mandatory</Requirement>
+			<Properties>
+				<InformationText>No text</InformationText>
+				<Read>Excluded</Read>
+				<Write>Mandatory</Write>
+				<WriteWithoutResponse>Excluded</WriteWithoutResponse>
+                <SignedWrite>Excluded</SignedWrite>
+                <ReliableWrite>Excluded</ReliableWrite>
+                <Notify>Excluded</Notify>
+                <Indicate>Excluded</Indicate>
+                <WritableAuxiliaries>Excluded</WritableAuxiliaries>
+				<Broadcast>Excluded</Broadcast>
+			</Properties>
+		</Characteristic>
+
+
+		<Characteristic name="Paulmann Brightness"
+						type="com.github.hypfvieh.paulmann.characteristic.brightness">
+			<InformativeText>
+				Paulmann brightness feature
+			</InformativeText>
+			<Requirement>Mandatory</Requirement>
+			<Properties>
+				<InformationText>No text</InformationText>
+				<Read>Optional</Read>
+				<Write>Mandatory</Write>
+				<WriteWithoutResponse>Excluded</WriteWithoutResponse>
+                <SignedWrite>Excluded</SignedWrite>
+                <ReliableWrite>Excluded</ReliableWrite>
+                <Notify>Excluded</Notify>
+                <Indicate>Excluded</Indicate>
+                <WritableAuxiliaries>Excluded</WritableAuxiliaries>
+				<Broadcast>Excluded</Broadcast>
+			</Properties>
+		</Characteristic>
+
+		<Characteristic name="Paulmann RemoteControl Feature"
+						type="com.github.hypfvieh.paulmann.characteristic.remotecontrol">
+			<InformativeText>
+				Paulmann remote control feature
+			</InformativeText>
+			<Requirement>Mandatory</Requirement>
+			<Properties>
+				<InformationText>No text</InformationText>
+				<Read>Optional</Read>
+				<Write>Mandatory</Write>
+				<WriteWithoutResponse>Excluded</WriteWithoutResponse>
+                <SignedWrite>Excluded</SignedWrite>
+                <ReliableWrite>Excluded</ReliableWrite>
+                <Notify>Excluded</Notify>
+                <Indicate>Excluded</Indicate>
+                <WritableAuxiliaries>Excluded</WritableAuxiliaries>
+				<Broadcast>Excluded</Broadcast>
+			</Properties>
+		</Characteristic>
+
+		<Characteristic name="Paulmann OnOff Toggle"
+						type="com.github.hypfvieh.paulmann.characteristic.onofftoggle">
+			<InformativeText>
+				Paulmann on/off toggle feature
+			</InformativeText>
+			<Requirement>Mandatory</Requirement>
+			<Properties>
+				<InformationText>No text</InformationText>
+				<Read>Optional</Read>
+				<Write>Mandatory</Write>
+				<WriteWithoutResponse>Excluded</WriteWithoutResponse>
+                <SignedWrite>Excluded</SignedWrite>
+                <ReliableWrite>Excluded</ReliableWrite>
+                <Notify>Excluded</Notify>
+                <Indicate>Excluded</Indicate>
+                <WritableAuxiliaries>Excluded</WritableAuxiliaries>
+				<Broadcast>Excluded</Broadcast>
+			</Properties>
+		</Characteristic>
+		<Characteristic name="Paulmann system time Feature"
+						type="com.github.hypfvieh.paulmann.characteristic.systemtime">
+			<InformativeText>
+				Paulmann date/time setting feature
+			</InformativeText>
+			<Requirement>Mandatory</Requirement>
+			<Properties>
+				<InformationText>No text</InformationText>
+				<Read>Optional</Read>
+				<Write>Mandatory</Write>
+				<WriteWithoutResponse>Excluded</WriteWithoutResponse>
+                <SignedWrite>Excluded</SignedWrite>
+                <ReliableWrite>Excluded</ReliableWrite>
+                <Notify>Excluded</Notify>
+                <Indicate>Excluded</Indicate>
+                <WritableAuxiliaries>Excluded</WritableAuxiliaries>
+				<Broadcast>Excluded</Broadcast>
+			</Properties>
+		</Characteristic>
+		<Characteristic name="Paulmann Timer Feature"
+						type="com.github.hypfvieh.paulmann.characteristic.onoffwithoptions">
+			<InformativeText>
+				Paulmann timer feature
+			</InformativeText>
+			<Requirement>Mandatory</Requirement>
+			<Properties>
+				<InformationText>No text</InformationText>
+				<Read>Optional</Read>
+				<Write>Mandatory</Write>
+				<WriteWithoutResponse>Excluded</WriteWithoutResponse>
+                <SignedWrite>Excluded</SignedWrite>
+                <ReliableWrite>Excluded</ReliableWrite>
+                <Notify>Excluded</Notify>
+                <Indicate>Excluded</Indicate>
+                <WritableAuxiliaries>Excluded</WritableAuxiliaries>
+				<Broadcast>Excluded</Broadcast>
+			</Properties>
+		</Characteristic>
+	</Characteristics>
+</Service>

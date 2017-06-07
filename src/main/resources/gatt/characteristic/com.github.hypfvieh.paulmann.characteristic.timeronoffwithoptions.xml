@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Characteristic xsi:noNamespaceSchemaLocation="http://schemas.bluetooth.org/Documents/characteristic.xsd"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Paulmann Timer Feature"
+                type="com.github.hypfvieh.paulmann.characteristic.onoffwithoptions" uuid="FFB7" last-modified="2017-03-01"
+                approved="No">
+    <InformativeText>
+        <Summary>Timer feature of Paulmann bluetooth actor.
+        </Summary>
+    </InformativeText>
+
+	<Value>
+		<Field name="startTimerEnabled">
+			<InformativeText>
+				Toggle start timer
+			</InformativeText>
+			<Requirement>Optional</Requirement>
+			<Format>boolean</Format>
+		</Field>
+		<Field name="startTimerHour">
+			<InformativeText>
+				Hour of start timer
+			</InformativeText>
+			<Requirement>Optional</Requirement>
+			<Format>uint8</Format>
+			<Minimum>0</Minimum>
+			<Maximum>23</Maximum>
+		</Field>
+		<Field name="startTimerMinute">
+			<InformativeText>
+				Minute of start timer
+			</InformativeText>
+			<Requirement>Optional</Requirement>
+			<Format>uint8</Format>
+			<Minimum>0</Minimum>
+			<Maximum>59</Maximum>
+		</Field>
+		<Field name="startTimerFadeMode">
+			<InformativeText>
+				Fading mode of start timer
+				0 - off (no fading effekt),
+				1 - 1 second fade,
+				2 - 1 minute fade,
+				3 - 10 minutes fade
+			</InformativeText>
+			<Requirement>Optional</Requirement>
+			<Format>2bit</Format>
+		</Field>
+		<Field name="stopTimerEnabled">
+			<InformativeText>
+				Toggle stop timer
+			</InformativeText>
+			<Requirement>Optional</Requirement>
+			<Format>boolean</Format>
+		</Field>
+		<Field name="stopTimerHour">
+			<InformativeText>
+				Hour of stop timer
+			</InformativeText>
+			<Requirement>Optional</Requirement>
+			<Format>uint8</Format>
+			<Minimum>0</Minimum>
+			<Maximum>23</Maximum>
+		</Field>
+		<Field name="stopTimerMinute">
+			<InformativeText>
+				Minute of stop timer
+			</InformativeText>
+			<Requirement>Optional</Requirement>
+			<Format>uint8</Format>
+			<Minimum>0</Minimum>
+			<Maximum>59</Maximum>
+		</Field>
+		<Field name="stopTimerFadeMode">
+			<InformativeText>
+				Fading mode of stop timer
+				0 - off (no fading effekt),
+				1 - 1 second fade,
+				2 - 1 minute fade,
+				3 - 10 minutes fade
+			</InformativeText>
+			<Requirement>Optional</Requirement>
+			<Format>2bit</Format>
+		</Field>
+	</Value>
+</Characteristic>
