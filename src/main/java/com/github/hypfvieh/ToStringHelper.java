@@ -17,8 +17,8 @@ public class ToStringHelper {
     /**
      * Read key information from {@link BluetoothDevice} and return it as String.
      *
-     * @param _device
-     * @return
+     * @param _device to create a string
+     * @return String. maybe null
      */
     public static String toString(BluetoothDevice _device) {
         if (_device == null) {
@@ -50,8 +50,8 @@ public class ToStringHelper {
     /**
      * Read key information from {@link BluetoothGattService} and return it as String.
      *
-     * @param _device
-     * @return
+     * @param _service to create string
+     * @return String, maybe null
      */
 
     public static String toString(BluetoothGattService _service) {
@@ -81,8 +81,8 @@ public class ToStringHelper {
     /**
      * Read key information from {@link BluetoothGattCharacteristic} and return it as String.
      *
-     * @param _device
-     * @return
+     * @param _ch to create string
+     * @return String, maybe null
      */
     public static String toString(BluetoothGattCharacteristic _ch) {
         if (_ch == null) {

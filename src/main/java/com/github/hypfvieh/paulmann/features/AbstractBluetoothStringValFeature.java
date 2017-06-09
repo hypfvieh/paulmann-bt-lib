@@ -19,13 +19,13 @@ public abstract class AbstractBluetoothStringValFeature extends AbstractBluetoot
 
     /**
      * Default value.
-     * @return
+     * @return default string
      */
     public abstract String getDefaultValue();
 
     /**
      * Write a String.
-     * @param _value
+     * @param _value to write
      * @return true on successful write, false otherwise
      */
     public boolean writeString(String _value) {
@@ -38,7 +38,7 @@ public abstract class AbstractBluetoothStringValFeature extends AbstractBluetoot
     /**
      * Use cached write to send the value.
      * @see AbstractBluetoothFeature#writeCached(byte[])
-     * @param _value
+     * @param _value to write
      */
     public void writeCached(String _value) {
         if (_value != null) {

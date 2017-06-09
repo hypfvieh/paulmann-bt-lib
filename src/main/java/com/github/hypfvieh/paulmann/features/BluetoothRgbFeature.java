@@ -15,8 +15,8 @@ public class BluetoothRgbFeature extends AbstractBluetoothFeature {
     /**
      * Default value to use for each channel.
      *
-     * @param _chan
-     * @return
+     * @param _chan color channel
+     * @return byte
      */
     public byte getDefaultValue(ColorChannel _chan) {
         return getMaxValue(_chan);
@@ -25,8 +25,8 @@ public class BluetoothRgbFeature extends AbstractBluetoothFeature {
     /**
      * Maximum supported value for each color channel.
      *
-     * @param _chan
-     * @return
+     * @param _chan color channel
+     * @return byte
      */
     public byte getMaxValue(ColorChannel _chan) {
         if (_chan == null) {
@@ -47,7 +47,7 @@ public class BluetoothRgbFeature extends AbstractBluetoothFeature {
     /**
      * Minimum supported value for each supported color channel.
      *
-     * @param _chan
+     * @param _chan color channel
      * @return default minimum value
      */
     public byte getMinValue(ColorChannel _chan) {
@@ -69,8 +69,8 @@ public class BluetoothRgbFeature extends AbstractBluetoothFeature {
     /**
      * Set the color of the given color channel.
      *
-     * @param _chan
-     * @param _val
+     * @param _chan color channel
+     * @param _val to set
      * @return true on success, false otherwise
      */
     public boolean setValue(ColorChannel _chan, byte _val) {
@@ -102,8 +102,11 @@ public class BluetoothRgbFeature extends AbstractBluetoothFeature {
     /**
      * Set all channels at once.
      *
-     * @param _color
-     * @return
+     * @param _red red color amount
+     * @param _green green color amount
+     * @param _blue blue color amount
+     *
+     * @return true if write was successful, false otherwise
      */
     public boolean setAllColors(byte _red, byte _green, byte _blue) {
 
@@ -130,7 +133,7 @@ public class BluetoothRgbFeature extends AbstractBluetoothFeature {
     /**
      * Read the current value of the given color channel.
      *
-     * @param _chan
+     * @param _chan color channel
      * @return current value or default value
      */
     public byte readValue(ColorChannel _chan) {

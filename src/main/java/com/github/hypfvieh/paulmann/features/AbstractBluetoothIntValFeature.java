@@ -20,7 +20,7 @@ public abstract class AbstractBluetoothIntValFeature extends AbstractBluetoothFe
     /**
      * Write a byte value.
      *
-     * @param _value
+     * @param _value to write
      * @return true on successful write, false otherwise
      */
     public boolean writeByte(byte _value) {
@@ -33,7 +33,7 @@ public abstract class AbstractBluetoothIntValFeature extends AbstractBluetoothFe
      * Use cached write to send the value.
      *
      * @see AbstractBluetoothFeature#writeCached(byte[])
-     * @param _value
+     * @param _value to write
      */
     public void writeCached(byte _value) {
         _value = validateValue(_value);
@@ -43,8 +43,8 @@ public abstract class AbstractBluetoothIntValFeature extends AbstractBluetoothFe
     /**
      * Validates the given value for min/max values and stepsize.
      *
-     * @param _value
-     * @return
+     * @param _value to check
+     * @return same as _input or the closest possible value
      */
     private byte validateValue(byte _value) {
         // range check, only send allowed values
@@ -77,28 +77,28 @@ public abstract class AbstractBluetoothIntValFeature extends AbstractBluetoothFe
     /**
      * StepSize used for all values.
      *
-     * @return
+     * @return byte
      */
     public abstract byte getStepSize();
 
     /**
      * Default value.
      *
-     * @return
+     * @return byte
      */
     public abstract byte getDefaultValue();
 
     /**
      * Minimum allowed value.
      *
-     * @return
+     * @return byte
      */
     public abstract byte getMinValue();
 
     /**
      * Maximum allowed value.
      *
-     * @return
+     * @return byte
      */
     public abstract byte getMaxValue();
 

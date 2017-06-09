@@ -49,12 +49,18 @@ public abstract class AbstractPaulmannDevice {
 
     /**
      * Returns a unmodifiable Map of all configured subDevices/features.
-     * @return
+     * @return unmodifiable map of {@link FeatureIdent} / {@link AbstractBluetoothFeature}
      */
     public Map<FeatureIdent<?>, AbstractBluetoothFeature> getConfiguredFeatures() {
         return Collections.unmodifiableMap(configuredFeatures);
     }
 
+    /**
+     * Get feature by given {@link FeatureIdent};
+     * @param _ident {@link FeatureIdent} to retrieve
+     * @param <T> some class extending {@link AbstractBluetoothFeature}
+     * @return {@link AbstractBluetoothFeature} compatible object
+     */
     public <T extends AbstractBluetoothFeature> T getFeature(FeatureIdent<T> _ident) {
         if (configuredFeatures == null || configuredFeatures.isEmpty()) {
             return null;
@@ -70,7 +76,7 @@ public abstract class AbstractPaulmannDevice {
 
     /**
      * Returns the bluetooth raw-device behind this instance.
-     * @return
+     * @return device
      */
     public BluetoothDevice getDevice() {
         return device;
@@ -78,7 +84,7 @@ public abstract class AbstractPaulmannDevice {
 
     /**
      * Returns the GATT service of this instance.
-     * @return
+     * @return gatt service
      */
     public BluetoothGattService getGattService() {
         return gattService;
@@ -86,7 +92,7 @@ public abstract class AbstractPaulmannDevice {
 
     /**
      * Logger for all derived classes.
-     * @return
+     * @return logger
      */
     protected Logger getLogger() {
         return logger;
@@ -101,13 +107,13 @@ public abstract class AbstractPaulmannDevice {
 
     /**
      * Returns the mapping Id of the concrete class.
-     * @return
+     * @return int
      */
     public abstract int getMappingId();
 
     /**
      * Checks if the given feature UUID is supported by the concrete device class.
-     * @param _uuid
+     * @param _uuid feature-uuid to check
      * @return true if supported, false otherwise
      */
     public boolean isFeatureSupported(String _uuid) {
@@ -125,8 +131,8 @@ public abstract class AbstractPaulmannDevice {
 
     /**
      * Check if the given feature is supported by the concrete class.
-     * @param _ident
-     * @return
+     * @param _ident feature to check
+     * @return true if feature is supported, false otherwise
      */
     public boolean isFeatureSupported(FeatureIdent<?> _ident) {
         if (_ident == null || getAllSupportedFeatures() == null) {

@@ -24,7 +24,7 @@ public abstract class AbstractBluetoothPredefinedIntValFeature extends AbstractB
     /**
      * The default value to use if none was set before.
      *
-     * @return
+     * @return default int
      */
     public int getDefaultValue() {
         return predefinedValues.isEmpty() ? 0 : predefinedValues.get(0).getValue();
@@ -33,7 +33,7 @@ public abstract class AbstractBluetoothPredefinedIntValFeature extends AbstractB
     /**
      * Minimum allowed value.
      *
-     * @return
+     * @return int
      */
     public int getMinValue() {
         return 0;
@@ -42,7 +42,7 @@ public abstract class AbstractBluetoothPredefinedIntValFeature extends AbstractB
     /**
      * Maximum allowed value.
      *
-     * @return
+     * @return int
      */
     public int getMaxValue() {
         return predefinedValues.size();
@@ -51,7 +51,7 @@ public abstract class AbstractBluetoothPredefinedIntValFeature extends AbstractB
     /**
      * Write a value from the predefined value list to the device by giving the position index of the value.
      *
-     * @param _index
+     * @param _index to write
      * @return true on success, false otherwise
      */
     public boolean writePredefinedValueByIndex(int _index) {
@@ -67,7 +67,7 @@ public abstract class AbstractBluetoothPredefinedIntValFeature extends AbstractB
      * Write the given value to the device.
      * Checks if the given value was defined in predefined value list.
      *
-     * @param _value
+     * @param _value to write
      * @return true on success, false otherwise
      */
     public boolean writePredefinedValue(int _value) {
@@ -90,7 +90,7 @@ public abstract class AbstractBluetoothPredefinedIntValFeature extends AbstractB
      * Add a new value to the predefined value list.
      * This method will prevent duplicates in the value list.
      *
-     * @param _val
+     * @param _val to add
      */
     protected void addPredefinedValue(PredefinedValue _val) {
         if (predefinedValues.contains(_val)) {
@@ -102,7 +102,7 @@ public abstract class AbstractBluetoothPredefinedIntValFeature extends AbstractB
     /**
      * Remove the given value from the list (if existing)
      *
-     * @param _val
+     * @param _val to remove
      * @return true if value was in list and was removed, false otherwise
      */
     protected boolean removePredefinedValue(PredefinedValue _val) {
@@ -112,8 +112,8 @@ public abstract class AbstractBluetoothPredefinedIntValFeature extends AbstractB
     /**
      * Check if the given value is already in the predefined value list.
      *
-     * @param _val
-     * @return
+     * @param _val to check
+     * @return true if already contained, false otherwise
      */
     protected boolean containsPredefinedValue(int _val) {
         return predefinedValues.contains(_val);
@@ -122,7 +122,7 @@ public abstract class AbstractBluetoothPredefinedIntValFeature extends AbstractB
     /**
      * Check if predefined value list is empty.
      *
-     * @return
+     * @return true if list is empty, false otherwise
      */
     protected boolean isEmpty() {
         return predefinedValues.isEmpty();

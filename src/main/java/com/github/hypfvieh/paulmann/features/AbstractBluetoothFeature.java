@@ -47,7 +47,7 @@ public abstract class AbstractBluetoothFeature {
      * This can be used to avoid flooding the bluetooth device with commands it could not handle at that speed
      * (which could lead to weird behaviors when using e.g. light dimming features).
      *
-     * @param _value
+     * @param _value value to write
      */
     public void writeCached(byte[] _value) {
         if (_value != null) {
@@ -64,7 +64,7 @@ public abstract class AbstractBluetoothFeature {
     /**
      * Creates a timer taks to send the last entry of the cached command queue.
      *
-     * @return
+     * @return TimerTask
      */
     private TimerTask createCachedSendTask() {
         return new TimerTask() {
@@ -83,7 +83,7 @@ public abstract class AbstractBluetoothFeature {
     /**
      * Write something to the device characteristics register.
      *
-     * @param _value
+     * @param _value value to write
      * @return true on successful write, false otherwise
      */
     public boolean writeValue(byte[] _value) {
@@ -151,7 +151,7 @@ public abstract class AbstractBluetoothFeature {
     /**
      * GATT service UUID.
      *
-     * @return
+     * @return service UUID, maybe null
      */
     public String getServiceId() {
         return gattService.getUuid();
@@ -160,7 +160,7 @@ public abstract class AbstractBluetoothFeature {
     /**
      * GATT characteristics UUID.
      *
-     * @return
+     * @return characteristics UUID, maybe null
      */
     public String getCharacteristicId() {
         return characteristic.getUuid();
@@ -178,7 +178,7 @@ public abstract class AbstractBluetoothFeature {
     /**
      * Bluetooth device used for the provided feature.
      *
-     * @return
+     * @return {@link BluetoothDevice}
      */
     public BluetoothDevice getDevice() {
         return device;
@@ -187,7 +187,7 @@ public abstract class AbstractBluetoothFeature {
     /**
      * Returns the last occurred read/write exception (if any), or null if no exception was raised.
      *
-     * @return
+     * @return Exception, maybe null
      */
     public Exception getLastError() {
         return lastError;
@@ -196,8 +196,8 @@ public abstract class AbstractBluetoothFeature {
     /**
      * Helper to convert a byteArray to byte.
      *
-     * @param _byteArr
-     * @return
+     * @param _byteArr byte array to convert
+     * @return byte
      */
     public static byte byteArrayToByte(byte[] _byteArr) {
         if (_byteArr == null) {
@@ -209,8 +209,8 @@ public abstract class AbstractBluetoothFeature {
     /**
      * Helper to convert a byte to byte array.
      *
-     * @param _byteVal
-     * @return
+     * @param _byteVal byte value to convert
+     * @return byte array
      */
     public static byte[] byteToByteArray(byte _byteVal) {
         return new byte[] { _byteVal };

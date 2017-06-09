@@ -16,7 +16,7 @@ public class BluetoothSystemTimeFeature extends AbstractBluetoothFeature {
     /**
      * Setup current date and time to the device.
      *
-     * @param _date
+     * @param _date date/time to set
      * @return true on success, false otherwise
      */
     public boolean setDateTime(Date _date) {

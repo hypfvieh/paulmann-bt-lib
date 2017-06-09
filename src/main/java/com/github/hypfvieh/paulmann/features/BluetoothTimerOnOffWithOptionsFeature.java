@@ -76,8 +76,8 @@ public class BluetoothTimerOnOffWithOptionsFeature extends AbstractBluetoothFeat
 
     /**
      * Helper to validate hours.
-     * @param _hour
-     * @return
+     * @param _hour to check
+     * @return true if valid, false otherwise
      */
     private boolean validateHour(byte _hour) {
         return (_hour > 23 || _hour < 0);
@@ -85,8 +85,8 @@ public class BluetoothTimerOnOffWithOptionsFeature extends AbstractBluetoothFeat
 
     /**
      * Helper to validate minutes.
-     * @param _minute
-     * @return
+     * @param _minute to check
+     * @return true if valid, false otherwise
      */
     private boolean validateMinute(byte _minute) {
         return (_minute < 0 || _minute > 59);
@@ -129,7 +129,7 @@ public class BluetoothTimerOnOffWithOptionsFeature extends AbstractBluetoothFeat
 
     /**
      * Check if start timer is enabled.
-     * @return
+     * @return true if timer enabled, false otherwise
      */
     public boolean isStartTimeEnabled() {
         return startTimeEnabled;
@@ -137,7 +137,7 @@ public class BluetoothTimerOnOffWithOptionsFeature extends AbstractBluetoothFeat
 
     /**
      * Enable/disable the start timer.
-     * @param _startTimeEnabled
+     * @param _startTimeEnabled true to enable timer, false disable timer
      */
     public void setStartTimeEnabled(boolean _startTimeEnabled) {
         startTimeEnabled = _startTimeEnabled;
@@ -145,7 +145,7 @@ public class BluetoothTimerOnOffWithOptionsFeature extends AbstractBluetoothFeat
 
     /**
      * Check if stop timer is enabled.
-     * @return
+     * @return true if timer enabled, false otherwise
      */
     public boolean isStopTimeEnabled() {
         return stopTimeEnabled;
@@ -153,7 +153,7 @@ public class BluetoothTimerOnOffWithOptionsFeature extends AbstractBluetoothFeat
 
     /**
      * Enable/disable the stop timer.
-     * @param _stopTimeEnabled
+     * @param _stopTimeEnabled true to enable timer, false to disable
      */
     public void setStopTimeEnabled(boolean _stopTimeEnabled) {
         stopTimeEnabled = _stopTimeEnabled;
@@ -161,7 +161,7 @@ public class BluetoothTimerOnOffWithOptionsFeature extends AbstractBluetoothFeat
 
     /**
      * The current fading option configured for the start timer event.
-     * @param _stopFadingOption
+     * @return {@link FadeOption}
      */
     public FadeOption getStartFadingOption() {
         return startFadingOption;
@@ -169,7 +169,7 @@ public class BluetoothTimerOnOffWithOptionsFeature extends AbstractBluetoothFeat
 
     /**
      * Setup the Fading options to use when start timer event is fired.
-     * @param _stopFadingOption
+     * @param _startFadingOption {@link FadeOption} to set
      */
     public void setStartFadingOption(FadeOption _startFadingOption) {
         startFadingOption = _startFadingOption;
@@ -177,7 +177,7 @@ public class BluetoothTimerOnOffWithOptionsFeature extends AbstractBluetoothFeat
 
     /**
      * The current fading option configured for the stop timer event.
-     * @param _stopFadingOption
+     * @return {@link FadeOption}
      */
     public FadeOption getStopFadingOption() {
         return stopFadingOption;
@@ -185,7 +185,7 @@ public class BluetoothTimerOnOffWithOptionsFeature extends AbstractBluetoothFeat
 
     /**
      * Setup the Fading options to use when stop timer event is fired.
-     * @param _stopFadingOption
+     * @param _stopFadingOption {@link FadeOption} to set
      */
     public void setStopFadingOption(FadeOption _stopFadingOption) {
         stopFadingOption = _stopFadingOption;
@@ -193,7 +193,7 @@ public class BluetoothTimerOnOffWithOptionsFeature extends AbstractBluetoothFeat
 
     /**
      * Hour which is configured to stop the timer.
-     * @return
+     * @return byte
      */
     public byte getStopTimeHour() {
         return stopTimeHour;
@@ -201,7 +201,7 @@ public class BluetoothTimerOnOffWithOptionsFeature extends AbstractBluetoothFeat
 
     /**
      * Minute which is configured to stop the timer.
-     * @return
+     * @return byte
      */
     public byte getStopTimeMinute() {
         return stopTimeMinute;
@@ -209,7 +209,7 @@ public class BluetoothTimerOnOffWithOptionsFeature extends AbstractBluetoothFeat
 
     /**
      * Hour which is configured to start the timer.
-     * @return
+     * @return byte
      */
     public byte getStartTimeHour() {
         return startTimeHour;
@@ -217,7 +217,7 @@ public class BluetoothTimerOnOffWithOptionsFeature extends AbstractBluetoothFeat
 
     /**
      * Minute which is configured to start the timer.
-     * @return
+     * @return byte
      */
     public byte getStartTimeMinute() {
         return startTimeMinute;

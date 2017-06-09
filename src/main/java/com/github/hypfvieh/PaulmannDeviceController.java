@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.bluez.exceptions.BluezDoesNotExistsException;
 import org.freedesktop.dbus.AbstractPropertiesHandler;
 import org.freedesktop.dbus.exceptions.DBusException;
@@ -65,7 +65,7 @@ public class PaulmannDeviceController {
      * Returns a list of all found bluetooth adapters.
      * Uses the cached list of adapters if called more than once.
      * If you want to refresh the internal list use {@link #getBluetoothAdapters(boolean)}.
-     * @return
+     * @return list of {@link BluetoothAdapter}
      */
     public static List<BluetoothAdapter> getBluetoothAdapters() {
         return getInstance().manager.getAdapters();
@@ -73,11 +73,11 @@ public class PaulmannDeviceController {
 
     /**
      * Returns a list of all found bluetooth adapters either from cache or retrieves a new list from Dbus.
-     * If _refresh is true, will always gather list from Dbus, otherwise will 
+     * If _refresh is true, will always gather list from Dbus, otherwise will
      * use the internal cached list if the list is not empty.
-     * 
+     *
      * @param _refresh true to get a new list from Dbus, false otherwise
-     * @return
+     * @return list of {@link BluetoothAdapter}
      */
     public static List<BluetoothAdapter> getBluetoothAdapters(boolean _refresh) {
         if (!_refresh && !BT_ADAPTER_LIST.isEmpty()) {
@@ -86,12 +86,12 @@ public class PaulmannDeviceController {
         BT_ADAPTER_LIST.addAll(getInstance().manager.getAdapters());
         return BT_ADAPTER_LIST;
     }
-    
+
     /**
      * Scan for bluetooth devices for _timeout seconds.
      *
-     * @param _timeout
-     * @throws InterruptedException
+     * @param _timeout timeout for scanning
+     * @throws InterruptedException on error
      */
     public void scanForDevices(int _timeout) throws InterruptedException {
         int timeout = DEFAULT_SCAN_TIMEOUT_SEC;
@@ -141,7 +141,7 @@ public class PaulmannDeviceController {
     /**
      * Returns a list of all devices which could be managed by {@link PaulmannDeviceController}.
      *
-     * @return
+     * @return unmodifiable map of macaddress / {@link AbstractPaulmannDevice}
      */
     public Map<String, AbstractPaulmannDevice> getDevices() {
         if (devices == null || devices.isEmpty()) {
@@ -168,8 +168,8 @@ public class PaulmannDeviceController {
     /**
      * Setup the default bluetooth adapter to use.
      *
-     * @param _macAddress
-     * @throws BluezDoesNotExistsException
+     * @param _macAddress adapters MAC address
+     * @throws BluezDoesNotExistsException if adapter does not exist
      */
     public void setDefaultBluetoothAdapter(String _macAddress) throws BluezDoesNotExistsException {
         manager.setDefaultAdapter(_macAddress);
@@ -179,7 +179,7 @@ public class PaulmannDeviceController {
      * List all found devices raw information.
      *
      * @param _showUnsupported also list unsupported devices
-     * @return
+     * @return list of {@link DeviceDetails}, maybe empty but never null
      */
     public List<DeviceDetails> listAllRawDevices(boolean _showUnsupported) {
         List<DeviceDetails> devLst = new ArrayList<>();
@@ -198,7 +198,7 @@ public class PaulmannDeviceController {
     /**
      * Registers a PropertyChange callback.
      *
-     * @param _handler
+     * @param _handler callback handler
      * @return true if callback could be registered, false otherwise
      */
     public boolean registerPropertyHandler(AbstractPropertiesHandler _handler) {

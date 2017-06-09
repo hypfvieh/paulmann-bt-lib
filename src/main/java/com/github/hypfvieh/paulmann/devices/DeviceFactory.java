@@ -37,7 +37,7 @@ public class DeviceFactory {
     /**
      * Create the concreate implementation of {@link AbstractPaulmannDevice} based on the given _gattService.
      *
-     * @param _gattService
+     * @param _gattService to create device
      * @return concrete implementation object or null on error
      */
     public AbstractPaulmannDevice createDevice(BluetoothGattService _gattService) {
