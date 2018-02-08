@@ -3,6 +3,7 @@ package com.github.hypfvieh.paulmann.features;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.github.hypfvieh.bluetooth.wrapper.BluetoothGattCharacteristic;
 
@@ -116,7 +117,10 @@ public abstract class AbstractBluetoothPredefinedIntValFeature extends AbstractB
      * @return true if already contained, false otherwise
      */
     protected boolean containsPredefinedValue(int _val) {
-        return predefinedValues.contains(_val);
+        Optional<PredefinedValue> present = predefinedValues.stream()
+                .filter(f -> f.getValue() == _val)
+                .findFirst();
+        return present.isPresent();
     }
 
     /**

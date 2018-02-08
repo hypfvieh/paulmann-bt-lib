@@ -121,7 +121,7 @@ public abstract class AbstractPaulmannDevice {
             return false;
         }
         for (FeatureIdent<?> featureIdent : getAllSupportedFeatures()) {
-            if (featureIdent.equals(_uuid)) {
+            if (featureIdent.getServiceId().equals(_uuid)) {
                 return true;
             }
         }
