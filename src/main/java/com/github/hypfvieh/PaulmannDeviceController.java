@@ -304,6 +304,16 @@ public class PaulmannDeviceController {
             return supported;
         }
 
+        public String prettyToStringShort() {
+            List<String> text = new ArrayList<>();
+            text.add("Addr: " + getMacAddr());
+            text.add("Name: " + getName());
+            text.add("Alias: " + getAlias());
+            text.add("Library Support: " + isSupported());
+
+            return StringUtils.join(text, System.lineSeparator());
+        }
+
         public String prettyToString() {
             List<String> text = new ArrayList<>();
             text.add("Addr: " + getMacAddr());
@@ -334,7 +344,7 @@ public class PaulmannDeviceController {
                 text.add("~~~~~~~~~~~~~~~~~~~");
             }
 
-            return StringUtils.join(text, "\n");
+            return StringUtils.join(text, System.lineSeparator());
         }
 
         @Override
