@@ -3,6 +3,7 @@ package com.github.hypfvieh;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -107,7 +108,7 @@ public class PaulmannDeviceController {
     /**
      * Finds and creates instances of all supported Bluetooth devices.
      */
-    private void findAllManagableDevices() {
+    public void refreshDevices() {
         devices.clear();
         for (BluetoothDevice device : manager.getDevices()) {
             if (!SUPPORTED_DEVICES.contains(device.getName())) {
@@ -145,7 +146,7 @@ public class PaulmannDeviceController {
      */
     public Map<String, AbstractPaulmannDevice> getDevices() {
         if (devices == null || devices.isEmpty()) {
-            findAllManagableDevices();
+            Collections.unmodifiableMap(new HashMap<>());
         }
         return Collections.unmodifiableMap(devices);
     }
