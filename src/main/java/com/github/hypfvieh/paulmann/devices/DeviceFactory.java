@@ -50,7 +50,6 @@ public class DeviceFactory {
             Class<? extends AbstractPaulmannDevice> instanceClass = deviceClasses.get(device.getAlias());
             try {
                 AbstractPaulmannDevice newInstance = instanceClass.getConstructor(BluetoothGattService.class).newInstance(_gattService);
-                newInstance.getDevice().connect(); // establish initial connection
                 return newInstance;
             } catch (Exception _ex) {
                 logger.warn("Could not instanciate class " + instanceClass, _ex);

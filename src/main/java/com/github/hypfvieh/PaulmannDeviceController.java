@@ -17,6 +17,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.hypfvieh.bluetooth.DeviceManager;
+import com.github.hypfvieh.bluetooth.DiscoveryFilter;
+import com.github.hypfvieh.bluetooth.DiscoveryTransport;
 import com.github.hypfvieh.bluetooth.wrapper.BluetoothAdapter;
 import com.github.hypfvieh.bluetooth.wrapper.BluetoothDevice;
 import com.github.hypfvieh.bluetooth.wrapper.BluetoothGattCharacteristic;
@@ -53,6 +55,11 @@ public class PaulmannDeviceController {
     private PaulmannDeviceController() {
         try {
             manager = DeviceManager.createInstance(false);
+            
+            Map<DiscoveryFilter, Object> filter = new HashMap<>();
+            // only scan for bluetooth low energy (BLE)
+            filter.put(DiscoveryFilter.Transport, DiscoveryTransport.LE);
+            manager.setScanFilter(filter);
         } catch (DBusException _ex) {
             throw new RuntimeException(_ex);
         }
@@ -101,6 +108,7 @@ public class PaulmannDeviceController {
         }
 
         logger.debug("Scanning for bluetooth devices for {} seconds", timeout);
+        
         manager.scanForBluetoothDevices(timeout * 1000);
         logger.debug("Scanning for bluetooth devices has finished");
     }
@@ -112,19 +120,19 @@ public class PaulmannDeviceController {
         devices.clear();
         for (BluetoothDevice device : manager.getDevices()) {
             if (!SUPPORTED_DEVICES.contains(device.getName())) {
+                logger.debug("Device '{}' does not match any supported device name, ignoring.", device.getName());
                 continue; // ignore unsupported devices
             }
             try {
                 if (device.connect()) {
                     List<BluetoothGattService> services = device.getGattServices();
                     for (BluetoothGattService gattService : services) {
-                        if (!gattService.getUuid().toUpperCase().startsWith("0000FFB")) { // skip all non-paulman
-                                                                                          // services
+                        if (!gattService.getUuid().toUpperCase().startsWith("0000FFB")) { // skip all non-paulmann services
                             continue;
                         }
-                        AbstractPaulmannDevice createDevice = DeviceFactory.getInstance().createDevice(gattService);
-                        if (createDevice != null) {
-                            devices.put(device.getAddress(), createDevice);
+                        AbstractPaulmannDevice paulmannDevice = DeviceFactory.getInstance().createDevice(gattService);
+                        if (paulmannDevice != null) {
+                            devices.put(device.getAddress(), paulmannDevice);
                         } else {
                             logger.warn("Unable to create device for device={}, gattService={}",
                                     ToStringHelper.toString(device), ToStringHelper.toString(gattService));
@@ -211,7 +219,7 @@ public class PaulmannDeviceController {
             return false;
         }
     }
-
+  
     /**
      * Meta-Information class with all read properties of a bluetooth device.
      *
