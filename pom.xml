@@ -49,13 +49,13 @@
 		<dependency>
 			<groupId>com.github.hypfvieh</groupId>
 			<artifactId>bluez-dbus</artifactId>
-			<version>0.0.2</version>
+			<version>0.0.3-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>3.5</version>
+			<version>3.7</version>
 		</dependency>
 
 		<dependency>
