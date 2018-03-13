@@ -1,5 +1,6 @@
 package com.github.hypfvieh;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -10,15 +11,14 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
-import org.bluez.exceptions.BluezDoesNotExistsException;
-import org.freedesktop.dbus.AbstractPropertiesHandler;
+import org.bluez.exceptions.BluezDoesNotExistException;
 import org.freedesktop.dbus.exceptions.DBusException;
+import org.freedesktop.dbus.handlers.AbstractSignalHandlerBase;
+import org.freedesktop.dbus.messages.DBusSignal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.hypfvieh.bluetooth.DeviceManager;
-import com.github.hypfvieh.bluetooth.DiscoveryFilter;
-import com.github.hypfvieh.bluetooth.DiscoveryTransport;
 import com.github.hypfvieh.bluetooth.wrapper.BluetoothAdapter;
 import com.github.hypfvieh.bluetooth.wrapper.BluetoothDevice;
 import com.github.hypfvieh.bluetooth.wrapper.BluetoothGattCharacteristic;
@@ -29,6 +29,7 @@ import com.github.hypfvieh.paulmann.devices.LampRGB;
 import com.github.hypfvieh.paulmann.devices.LampRGBW;
 import com.github.hypfvieh.paulmann.devices.LampW;
 import com.github.hypfvieh.paulmann.devices.LampWC;
+import com.github.hypfvieh.util.TimeMeasure;
 
 /**
  * Main class for management of all supported bluetooth devices.
@@ -56,10 +57,10 @@ public class PaulmannDeviceController {
         try {
             manager = DeviceManager.createInstance(false);
             
-            Map<DiscoveryFilter, Object> filter = new HashMap<>();
+            // Map<DiscoveryFilter, Object> filter = new HashMap<>();
             // only scan for bluetooth low energy (BLE)
-            filter.put(DiscoveryFilter.Transport, DiscoveryTransport.LE);
-            manager.setScanFilter(filter);
+            // filter.put(DiscoveryFilter.Transport, DiscoveryTransport.LE);
+            // manager.setScanFilter(filter);
         } catch (DBusException _ex) {
             throw new RuntimeException(_ex);
         }
@@ -118,20 +119,25 @@ public class PaulmannDeviceController {
      */
     public void refreshDevices() {
         devices.clear();
+        TimeMeasure tm = new TimeMeasure();
         for (BluetoothDevice device : manager.getDevices()) {
             if (!SUPPORTED_DEVICES.contains(device.getName())) {
                 logger.debug("Device '{}' does not match any supported device name, ignoring.", device.getName());
                 continue; // ignore unsupported devices
             }
+            tm.reset();
             try {
                 if (device.connect()) {
+                    logger.debug("PERF: Connection establishment took {} ms", tm.getElapsed());
                     List<BluetoothGattService> services = device.getGattServices();
                     for (BluetoothGattService gattService : services) {
                         if (!gattService.getUuid().toUpperCase().startsWith("0000FFB")) { // skip all non-paulmann services
                             continue;
                         }
+                        logger.debug("PERF: Filtering services took {} ms", tm.getElapsed());
                         AbstractPaulmannDevice paulmannDevice = DeviceFactory.getInstance().createDevice(gattService);
                         if (paulmannDevice != null) {
+                            logger.debug("PERF: Device creation took {} ms", tm.getElapsed());
                             devices.put(device.getAddress(), paulmannDevice);
                         } else {
                             logger.warn("Unable to create device for device={}, gattService={}",
@@ -139,6 +145,7 @@ public class PaulmannDeviceController {
                         }
                     }
                     device.disconnect();
+                    logger.debug("PERF: Disconnection took {} ms", tm.getElapsed());
                 }
             } catch (Exception _ex) {
                 logger.debug("Cannot connect to device {} ({}), it seems to be offline", device.getName(),
@@ -171,7 +178,11 @@ public class PaulmannDeviceController {
             }
             devices.clear();
         }
-        manager.closeConnection();
+        try {
+            manager.close();
+        } catch (IOException _ex) {
+            logger.error("Could not close dbus/bluez connection", _ex);
+        }
     }
 
     /**
@@ -180,7 +191,7 @@ public class PaulmannDeviceController {
      * @param _macAddress adapters MAC address
      * @throws BluezDoesNotExistsException if adapter does not exist
      */
-    public void setDefaultBluetoothAdapter(String _macAddress) throws BluezDoesNotExistsException {
+    public void setDefaultBluetoothAdapter(String _macAddress) throws BluezDoesNotExistException {
         manager.setDefaultAdapter(_macAddress);
     }
 
@@ -205,14 +216,14 @@ public class PaulmannDeviceController {
     }
 
     /**
-     * Registers a PropertyChange callback.
+     * Registers a signal handler.
      *
      * @param _handler callback handler
      * @return true if callback could be registered, false otherwise
      */
-    public boolean registerPropertyHandler(AbstractPropertiesHandler _handler) {
+    public <T extends DBusSignal> boolean registerSignalHandler(AbstractSignalHandlerBase<T> _handler) {
         try {
-            manager.registerPropertyHandler(_handler);
+            manager.registerSignalHandler(_handler);
             return true;
         } catch (DBusException _ex) {
             logger.info("Could not register PropertiesChanged callback", _ex);
@@ -252,9 +263,6 @@ public class PaulmannDeviceController {
             try {
                 if (_dev.connect()) {
 
-                    modAlias = _dev.getModAlias();
-                    appearance = _dev.getAppearance() + "";
-                    btClass = _dev.getBluetoothClass() + "";
 
                     for (BluetoothGattService bluetoothGattService : _dev.getGattServices()) {
                         ArrayList<String> charUuids = new ArrayList<>();
@@ -264,6 +272,10 @@ public class PaulmannDeviceController {
                         }
                         servicesAndCharacteristics.put(bluetoothGattService.getUuid(), charUuids);
                     }
+                    
+                    modAlias = _dev.getModAlias();
+                    appearance = _dev.getAppearance() + "";
+                    btClass = _dev.getBluetoothClass() + "";
 
                     _dev.disconnect();
 

@@ -94,6 +94,7 @@ public abstract class AbstractBluetoothFeature {
         try {
             if (connectIfNotConnected()) {
                 characteristic.writeValue(_value, null);
+                device.disconnect();
                 return true;
             } else {
                 logger.debug("Could not connect to device");
@@ -115,7 +116,9 @@ public abstract class AbstractBluetoothFeature {
         lastError = null;
         try {
             if (connectIfNotConnected()) {
-                return characteristic.readValue(null);
+                byte[] readValue = characteristic.readValue(null);
+                device.disconnect();
+                return readValue;
             } else {
                 logger.debug("Could not connect to device.");
                 return null;
