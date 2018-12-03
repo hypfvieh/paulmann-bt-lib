@@ -13,9 +13,9 @@ public class LampRGBW extends AbstractPaulmannDevice {
             FeatureIdent.PAULMANN_RGB_FEATURE,
             FeatureIdent.PAULMANN_ON_OFF_FEATURE,
             FeatureIdent.PAULMANN_BRIGHTNESS_FEATURE,
-            FeatureIdent.PAULMANN_COLORTEMP_FEATURE,
-            FeatureIdent.PAULMANN_AUTOMOTIVE_INTERVAL_FEATURE,
-            FeatureIdent.PAULMANN_ON_OFF_TIMER_WITH_OPTIONS_FEATURE,
+            FeatureIdent.PAULMANN_COLORTEMP_RGBW_FEATURE,
+            FeatureIdent.PAULMANN_AUTOCHANGE_CONTROL_FEATURE,
+            FeatureIdent.PAULMANN_TIMER_FEATURE,
             FeatureIdent.PAULMANN_SYSTEMTIME_FEATURE,
             FeatureIdent.PAULMANN_WORKINGMODE_FEATURE,
             FeatureIdent.PAULMANN_REMOTECONTROLMODE_FEATURE,
@@ -40,8 +40,8 @@ public class LampRGBW extends AbstractPaulmannDevice {
      * {@inheritDoc}
      */
     @Override
-    public int getMappingId() {
-        return 208;
+    public int getDeviceTypeID() {
+        return 0xD1;
     }
 
 }

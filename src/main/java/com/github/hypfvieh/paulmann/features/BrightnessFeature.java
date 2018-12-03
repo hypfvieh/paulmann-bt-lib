@@ -2,9 +2,9 @@ package com.github.hypfvieh.paulmann.features;
 
 import com.github.hypfvieh.bluetooth.wrapper.BluetoothGattCharacteristic;
 
-public class BluetoothRemoteControlModeFeature extends AbstractBluetoothIntValFeature {
+public class BrightnessFeature extends AbstractByteValFeature {
 
-    public BluetoothRemoteControlModeFeature(BluetoothGattCharacteristic _char) {
+    public BrightnessFeature(BluetoothGattCharacteristic _char) {
         super(_char);
     }
 
@@ -13,7 +13,7 @@ public class BluetoothRemoteControlModeFeature extends AbstractBluetoothIntValFe
      */
     @Override
     public byte getStepSize() {
-        return 1;
+        return 5;
     }
 
     /**
@@ -21,7 +21,7 @@ public class BluetoothRemoteControlModeFeature extends AbstractBluetoothIntValFe
      */
     @Override
     public byte getDefaultValue() {
-        return 0;
+        return 10;
     }
 
     /**
@@ -37,7 +37,7 @@ public class BluetoothRemoteControlModeFeature extends AbstractBluetoothIntValFe
      */
     @Override
     public byte getMaxValue() {
-        return 1;
+        return 100;
     }
 
     /**
@@ -45,7 +45,7 @@ public class BluetoothRemoteControlModeFeature extends AbstractBluetoothIntValFe
      */
     @Override
     public FeatureIdent<?> getFeatureIdent() {
-        return FeatureIdent.PAULMANN_REMOTECONTROLMODE_FEATURE;
+        return FeatureIdent.PAULMANN_BRIGHTNESS_FEATURE;
     }
 
 }

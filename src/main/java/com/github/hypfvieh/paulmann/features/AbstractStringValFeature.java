@@ -10,10 +10,10 @@ import com.github.hypfvieh.bluetooth.wrapper.BluetoothGattCharacteristic;
 * @author David M.
 *
 */
-public abstract class AbstractBluetoothStringValFeature extends AbstractBluetoothFeature {
+public abstract class AbstractStringValFeature extends AbstractFeature {
 
 
-    protected AbstractBluetoothStringValFeature(BluetoothGattCharacteristic _characteristic) {
+    protected AbstractStringValFeature(BluetoothGattCharacteristic _characteristic) {
         super(_characteristic);
     }
 
@@ -37,7 +37,7 @@ public abstract class AbstractBluetoothStringValFeature extends AbstractBluetoot
 
     /**
      * Use cached write to send the value.
-     * @see AbstractBluetoothFeature#writeCached(byte[])
+     * @see AbstractFeature#writeCached(byte[])
      * @param _value to write
      */
     public void writeCached(String _value) {

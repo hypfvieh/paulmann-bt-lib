@@ -2,7 +2,7 @@ package com.github.hypfvieh.paulmann.features;
 
 import com.github.hypfvieh.bluetooth.wrapper.BluetoothGattCharacteristic;
 
-public class BluetoothTimerOnOffWithOptionsFeature extends AbstractBluetoothFeature {
+public class TimerFeature extends AbstractFeature {
 
     public static final int TIMEROPTION_FADE_OFF   = 0;
     public static final int TIMEROPTION_FADE_1SEC  = 1;
@@ -21,7 +21,7 @@ public class BluetoothTimerOnOffWithOptionsFeature extends AbstractBluetoothFeat
     private FadeOption      startFadingOption      = FadeOption.OFF;
     private FadeOption      stopFadingOption       = FadeOption.OFF;
 
-    public BluetoothTimerOnOffWithOptionsFeature(BluetoothGattCharacteristic _char) {
+    public TimerFeature(BluetoothGattCharacteristic _char) {
         super(_char);
     }
 
@@ -228,7 +228,7 @@ public class BluetoothTimerOnOffWithOptionsFeature extends AbstractBluetoothFeat
      */
     @Override
     public FeatureIdent<?> getFeatureIdent() {
-        return FeatureIdent.PAULMANN_ON_OFF_TIMER_WITH_OPTIONS_FEATURE;
+        return FeatureIdent.PAULMANN_TIMER_FEATURE;
     }
 
     /**

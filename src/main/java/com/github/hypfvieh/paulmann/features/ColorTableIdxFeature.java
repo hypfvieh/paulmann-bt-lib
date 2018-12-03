@@ -2,9 +2,9 @@ package com.github.hypfvieh.paulmann.features;
 
 import com.github.hypfvieh.bluetooth.wrapper.BluetoothGattCharacteristic;
 
-public class BluetoothBrightnessFeature extends AbstractBluetoothIntValFeature {
+public class ColorTableIdxFeature extends AbstractByteValFeature {
 
-    public BluetoothBrightnessFeature(BluetoothGattCharacteristic _char) {
+    public ColorTableIdxFeature(BluetoothGattCharacteristic _char) {
         super(_char);
     }
 
@@ -13,7 +13,7 @@ public class BluetoothBrightnessFeature extends AbstractBluetoothIntValFeature {
      */
     @Override
     public byte getStepSize() {
-        return 5;
+        return 1;
     }
 
     /**
@@ -21,8 +21,7 @@ public class BluetoothBrightnessFeature extends AbstractBluetoothIntValFeature {
      */
     @Override
     public byte getDefaultValue() {
-        // TODO Auto-generated method stub
-        return 10;
+        return 0;
     }
 
     /**
@@ -30,8 +29,7 @@ public class BluetoothBrightnessFeature extends AbstractBluetoothIntValFeature {
      */
     @Override
     public byte getMinValue() {
-        // TODO Auto-generated method stub
-        return 10;
+        return 0;
     }
 
     /**
@@ -39,8 +37,7 @@ public class BluetoothBrightnessFeature extends AbstractBluetoothIntValFeature {
      */
     @Override
     public byte getMaxValue() {
-        // TODO Auto-generated method stub
-        return 100;
+        return 16;
     }
 
     /**
@@ -48,7 +45,7 @@ public class BluetoothBrightnessFeature extends AbstractBluetoothIntValFeature {
      */
     @Override
     public FeatureIdent<?> getFeatureIdent() {
-        return FeatureIdent.PAULMANN_BRIGHTNESS_FEATURE;
+        return FeatureIdent.PAULMANN_COLOR_TABLE_IDX_FEATURE;
     }
 
 }

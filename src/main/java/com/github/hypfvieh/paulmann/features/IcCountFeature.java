@@ -2,18 +2,10 @@ package com.github.hypfvieh.paulmann.features;
 
 import com.github.hypfvieh.bluetooth.wrapper.BluetoothGattCharacteristic;
 
-public class BluetoothOnOffFeature extends AbstractBluetoothIntValFeature {
+public class IcCountFeature extends AbstractByteValFeature {
 
-    public BluetoothOnOffFeature(BluetoothGattCharacteristic _char) {
+    public IcCountFeature(BluetoothGattCharacteristic _char) {
         super(_char);
-    }
-
-    public boolean toggle(boolean _turnOn) {
-        return writeByte(_turnOn ? getMaxValue() : getMinValue());
-    }
-
-    public boolean isTurnedOn() {
-        return readByte() == getMaxValue() ? true : false;
     }
 
     /**
@@ -29,7 +21,7 @@ public class BluetoothOnOffFeature extends AbstractBluetoothIntValFeature {
      */
     @Override
     public byte getDefaultValue() {
-        return 0;
+        return 50;
     }
 
     /**
@@ -45,7 +37,7 @@ public class BluetoothOnOffFeature extends AbstractBluetoothIntValFeature {
      */
     @Override
     public byte getMaxValue() {
-        return 1;
+        return 50;
     }
 
     /**
@@ -53,7 +45,7 @@ public class BluetoothOnOffFeature extends AbstractBluetoothIntValFeature {
      */
     @Override
     public FeatureIdent<?> getFeatureIdent() {
-        return FeatureIdent.PAULMANN_ON_OFF_FEATURE;
+        return FeatureIdent.PAULMANN_IC_COUNT_FEATURE;
     }
 
 }

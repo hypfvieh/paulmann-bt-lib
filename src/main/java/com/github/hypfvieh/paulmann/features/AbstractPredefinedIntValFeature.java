@@ -13,11 +13,11 @@ import com.github.hypfvieh.bluetooth.wrapper.BluetoothGattCharacteristic;
  * @author David M.
  *
  */
-public abstract class AbstractBluetoothPredefinedIntValFeature extends AbstractBluetoothFeature {
+public abstract class AbstractPredefinedIntValFeature extends AbstractFeature {
 
     private final List<PredefinedValue> predefinedValues = new ArrayList<>();
 
-    protected AbstractBluetoothPredefinedIntValFeature(BluetoothGattCharacteristic _characteristic) {
+    protected AbstractPredefinedIntValFeature(BluetoothGattCharacteristic _characteristic) {
         super(_characteristic);
         populatePredefinedList();
     }

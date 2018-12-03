@@ -1,6 +1,5 @@
 package com.github.hypfvieh;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -56,7 +55,7 @@ public class PaulmannDeviceController {
     private PaulmannDeviceController() {
         try {
             manager = DeviceManager.createInstance(false);
-            
+
             // Map<DiscoveryFilter, Object> filter = new HashMap<>();
             // only scan for bluetooth low energy (BLE)
             // filter.put(DiscoveryFilter.Transport, DiscoveryTransport.LE);
@@ -109,7 +108,7 @@ public class PaulmannDeviceController {
         }
 
         logger.debug("Scanning for bluetooth devices for {} seconds", timeout);
-        
+
         manager.scanForBluetoothDevices(timeout * 1000);
         logger.debug("Scanning for bluetooth devices has finished");
     }
@@ -178,11 +177,7 @@ public class PaulmannDeviceController {
             }
             devices.clear();
         }
-        try {
-            manager.close();
-        } catch (IOException _ex) {
-            logger.error("Could not close dbus/bluez connection", _ex);
-        }
+        manager.closeConnection();
     }
 
     /**
@@ -230,7 +225,7 @@ public class PaulmannDeviceController {
             return false;
         }
     }
-  
+
     /**
      * Meta-Information class with all read properties of a bluetooth device.
      *
@@ -272,7 +267,7 @@ public class PaulmannDeviceController {
                         }
                         servicesAndCharacteristics.put(bluetoothGattService.getUuid(), charUuids);
                     }
-                    
+
                     modAlias = _dev.getModAlias();
                     appearance = _dev.getAppearance() + "";
                     btClass = _dev.getBluetoothClass() + "";

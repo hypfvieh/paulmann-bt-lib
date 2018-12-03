@@ -2,15 +2,9 @@ package com.github.hypfvieh.paulmann.features;
 
 import com.github.hypfvieh.bluetooth.wrapper.BluetoothGattCharacteristic;
 
-public class BluetoothAutomotiveFeature extends AbstractBluetoothIntValFeature {
+public class RemoteControlModeFeature extends AbstractByteValFeature {
 
-    public static final int AUTOMOTIVE_MODE_RGB = -1;
-    public static final int AUTOMOTIVE_MODE_FLASH = 0;
-    public static final int AUTOMOTIVE_MODE_STROBEFADE = 1;
-    public static final int AUTOMOTIVE_MODE_FADE = 2;
-    public static final int AUTOMOTIVE_MODE_SMOOTH = 3;
-
-    public BluetoothAutomotiveFeature(BluetoothGattCharacteristic _char) {
+    public RemoteControlModeFeature(BluetoothGattCharacteristic _char) {
         super(_char);
     }
 
@@ -27,7 +21,7 @@ public class BluetoothAutomotiveFeature extends AbstractBluetoothIntValFeature {
      */
     @Override
     public byte getDefaultValue() {
-        return -1;
+        return 0;
     }
 
     /**
@@ -35,7 +29,7 @@ public class BluetoothAutomotiveFeature extends AbstractBluetoothIntValFeature {
      */
     @Override
     public byte getMinValue() {
-        return -1;
+        return 0;
     }
 
     /**
@@ -43,7 +37,7 @@ public class BluetoothAutomotiveFeature extends AbstractBluetoothIntValFeature {
      */
     @Override
     public byte getMaxValue() {
-        return 3;
+        return 1;
     }
 
     /**
@@ -51,7 +45,7 @@ public class BluetoothAutomotiveFeature extends AbstractBluetoothIntValFeature {
      */
     @Override
     public FeatureIdent<?> getFeatureIdent() {
-        return FeatureIdent.PAULMANN_AUTOMOTIVE_INTERVAL_FEATURE;
+        return FeatureIdent.PAULMANN_REMOTECONTROLMODE_FEATURE;
     }
 
 }

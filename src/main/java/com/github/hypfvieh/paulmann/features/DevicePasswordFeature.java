@@ -2,11 +2,11 @@ package com.github.hypfvieh.paulmann.features;
 
 import com.github.hypfvieh.bluetooth.wrapper.BluetoothGattCharacteristic;
 
-public class BluetoothDevicePasswordFeature extends AbstractBluetoothStringValFeature {
+public class DevicePasswordFeature extends AbstractStringValFeature {
 
     private boolean authenticated;
 
-    public BluetoothDevicePasswordFeature(BluetoothGattCharacteristic _char) {
+    public DevicePasswordFeature(BluetoothGattCharacteristic _char) {
         super(_char);
     }
 
@@ -15,7 +15,7 @@ public class BluetoothDevicePasswordFeature extends AbstractBluetoothStringValFe
      */
     @Override
     public String getDefaultValue() {
-        return null;
+        return "0123";
     }
 
     /**

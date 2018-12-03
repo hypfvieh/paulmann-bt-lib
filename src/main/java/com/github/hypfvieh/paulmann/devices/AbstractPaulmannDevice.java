@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 
 import com.github.hypfvieh.bluetooth.wrapper.BluetoothDevice;
 import com.github.hypfvieh.bluetooth.wrapper.BluetoothGattService;
-import com.github.hypfvieh.paulmann.features.AbstractBluetoothFeature;
-import com.github.hypfvieh.paulmann.features.BluetoothFeatureFactory;
+import com.github.hypfvieh.paulmann.features.AbstractFeature;
+import com.github.hypfvieh.paulmann.features.FeatureFactory;
 import com.github.hypfvieh.paulmann.features.FeatureIdent;
 
 /**
@@ -24,7 +24,7 @@ public abstract class AbstractPaulmannDevice {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    private Map<FeatureIdent<? extends AbstractBluetoothFeature>, AbstractBluetoothFeature> configuredFeatures = new LinkedHashMap<>();
+    private Map<FeatureIdent<? extends AbstractFeature>, AbstractFeature> configuredFeatures = new LinkedHashMap<>();
 
     private final BluetoothDevice device;
     private final BluetoothGattService gattService;
@@ -37,10 +37,10 @@ public abstract class AbstractPaulmannDevice {
     protected AbstractPaulmannDevice(BluetoothGattService _gattService, FeatureIdent<?>... _featureIdent) {
         this(_gattService);
         for (FeatureIdent<?> featureIdent : _featureIdent) {
-            AbstractBluetoothFeature feature = BluetoothFeatureFactory.getInstance().createFeature(featureIdent,
+            AbstractFeature feature = FeatureFactory.getInstance().createFeature(featureIdent,
                     _gattService);
             if (feature == null) {
-                getLogger().warn("Cannot enable supported feature {}, unable to create instance", featureIdent.name());
+                getLogger().warn("Cannot enable supported feature {}, unable to create instance", featureIdent.getName());
             } else {
                 configuredFeatures.put(featureIdent, feature);
             }
@@ -49,23 +49,23 @@ public abstract class AbstractPaulmannDevice {
 
     /**
      * Returns a unmodifiable Map of all configured subDevices/features.
-     * @return unmodifiable map of {@link FeatureIdent} / {@link AbstractBluetoothFeature}
+     * @return unmodifiable map of {@link FeatureIdent} / {@link AbstractFeature}
      */
-    public Map<FeatureIdent<?>, AbstractBluetoothFeature> getConfiguredFeatures() {
+    public Map<FeatureIdent<?>, AbstractFeature> getConfiguredFeatures() {
         return Collections.unmodifiableMap(configuredFeatures);
     }
 
     /**
      * Get feature by given {@link FeatureIdent};
      * @param _ident {@link FeatureIdent} to retrieve
-     * @param <T> some class extending {@link AbstractBluetoothFeature}
-     * @return {@link AbstractBluetoothFeature} compatible object
+     * @param <T> some class extending {@link AbstractFeature}
+     * @return {@link AbstractFeature} compatible object
      */
-    public <T extends AbstractBluetoothFeature> T getFeature(FeatureIdent<T> _ident) {
+    public <T extends AbstractFeature> T getFeature(FeatureIdent<T> _ident) {
         if (configuredFeatures == null || configuredFeatures.isEmpty()) {
             return null;
         }
-        AbstractBluetoothFeature abstractBluetoothFeature = configuredFeatures.get(_ident);
+        AbstractFeature abstractBluetoothFeature = configuredFeatures.get(_ident);
 
         if (abstractBluetoothFeature.getClass().isAssignableFrom(_ident.getDeviceClass())) {
             return _ident.getDeviceClass().cast(abstractBluetoothFeature);
@@ -106,10 +106,10 @@ public abstract class AbstractPaulmannDevice {
     public abstract FeatureIdent<?>[] getAllSupportedFeatures();
 
     /**
-     * Returns the mapping Id of the concrete class.
+     * Returns the device magic number.
      * @return int
      */
-    public abstract int getMappingId();
+    public abstract int getDeviceTypeID();
 
     /**
      * Checks if the given feature UUID is supported by the concrete device class.

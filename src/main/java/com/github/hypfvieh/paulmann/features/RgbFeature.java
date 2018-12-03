@@ -2,13 +2,13 @@ package com.github.hypfvieh.paulmann.features;
 
 import com.github.hypfvieh.bluetooth.wrapper.BluetoothGattCharacteristic;
 
-public class BluetoothRgbFeature extends AbstractBluetoothFeature {
+public class RgbFeature extends AbstractFeature {
 
     private byte red = getDefaultValue(ColorChannel.RED);
     private byte green = getDefaultValue(ColorChannel.GREEN);
     private byte blue = getDefaultValue(ColorChannel.BLUE);
 
-    protected BluetoothRgbFeature(BluetoothGattCharacteristic _characteristic) {
+    protected RgbFeature(BluetoothGattCharacteristic _characteristic) {
         super(_characteristic);
     }
 

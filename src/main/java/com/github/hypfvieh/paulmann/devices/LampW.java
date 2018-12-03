@@ -14,7 +14,7 @@ public class LampW extends AbstractPaulmannDevice {
             FeatureIdent.PAULMANN_ON_OFF_FEATURE,
             FeatureIdent.PAULMANN_SYSTEMTIME_FEATURE,
             FeatureIdent.PAULMANN_REMOTECONTROLMODE_FEATURE,
-            FeatureIdent.PAULMANN_ON_OFF_TIMER_WITH_OPTIONS_FEATURE,
+            FeatureIdent.PAULMANN_TIMER_FEATURE,
             FeatureIdent.PAULMANN_DEVICE_PASSWORD_FEATURE
     };
 
@@ -36,8 +36,8 @@ public class LampW extends AbstractPaulmannDevice {
      * {@inheritDoc}
      */
     @Override
-    public int getMappingId() {
-        return 211;
+    public int getDeviceTypeID() {
+        return 0xD4;
     }
 
 }

@@ -13,8 +13,8 @@ public class LampRGB extends AbstractPaulmannDevice {
             FeatureIdent.PAULMANN_RGB_FEATURE,
             FeatureIdent.PAULMANN_ON_OFF_FEATURE,
             FeatureIdent.PAULMANN_BRIGHTNESS_FEATURE,
-            FeatureIdent.PAULMANN_AUTOMOTIVE_INTERVAL_FEATURE,
-            FeatureIdent.PAULMANN_ON_OFF_TIMER_WITH_OPTIONS_FEATURE,
+            FeatureIdent.PAULMANN_AUTOCHANGE_CONTROL_FEATURE,
+            FeatureIdent.PAULMANN_TIMER_FEATURE,
             FeatureIdent.PAULMANN_SYSTEMTIME_FEATURE,
             FeatureIdent.PAULMANN_REMOTECONTROLMODE_FEATURE,
             FeatureIdent.PAULMANN_DEVICE_PASSWORD_FEATURE
@@ -38,8 +38,8 @@ public class LampRGB extends AbstractPaulmannDevice {
      * {@inheritDoc}
      */
     @Override
-    public int getMappingId() {
-        return 209;
+    public int getDeviceTypeID() {
+        return 0xD2;
     }
 
 }

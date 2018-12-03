@@ -1,5 +1,7 @@
 package com.github.hypfvieh.paulmann.features;
 
+import java.math.BigInteger;
+
 import com.github.hypfvieh.bluetooth.wrapper.BluetoothGattCharacteristic;
 
 /**
@@ -9,11 +11,11 @@ import com.github.hypfvieh.bluetooth.wrapper.BluetoothGattCharacteristic;
  * @author hypfvieh
  *
  */
-public abstract class AbstractBluetoothIntValFeature extends AbstractBluetoothFeature {
+public abstract class AbstractIntValFeature extends AbstractFeature {
 
     public static final byte ERROR_RETURN = -128;
 
-    protected AbstractBluetoothIntValFeature(BluetoothGattCharacteristic _characteristic) {
+    protected AbstractIntValFeature(BluetoothGattCharacteristic _characteristic) {
         super(_characteristic);
     }
 
@@ -23,21 +25,21 @@ public abstract class AbstractBluetoothIntValFeature extends AbstractBluetoothFe
      * @param _value to write
      * @return true on successful write, false otherwise
      */
-    public boolean writeByte(byte _value) {
+    public boolean writeByte(int _value) {
         _value = validateValue(_value);
 
-        return writeValue(byteToByteArray(_value));
+        return writeValue(BigInteger.valueOf(_value).toByteArray());
     }
 
     /**
      * Use cached write to send the value.
      *
-     * @see AbstractBluetoothFeature#writeCached(byte[])
+     * @see AbstractFeature#writeCached(byte[])
      * @param _value to write
      */
-    public void writeCached(byte _value) {
+    public void writeCached(int _value) {
         _value = validateValue(_value);
-        writeCached(byteToByteArray(_value));
+        writeCached(BigInteger.valueOf(_value).toByteArray());
     }
 
     /**
@@ -46,7 +48,7 @@ public abstract class AbstractBluetoothIntValFeature extends AbstractBluetoothFe
      * @param _value to check
      * @return same as _input or the closest possible value
      */
-    private byte validateValue(byte _value) {
+    private int validateValue(int _value) {
         // range check, only send allowed values
         if (_value > getMaxValue()) {
             _value = getMaxValue();
@@ -79,28 +81,28 @@ public abstract class AbstractBluetoothIntValFeature extends AbstractBluetoothFe
      *
      * @return byte
      */
-    public abstract byte getStepSize();
+    public abstract int getStepSize();
 
     /**
      * Default value.
      *
      * @return byte
      */
-    public abstract byte getDefaultValue();
+    public abstract int getDefaultValue();
 
     /**
      * Minimum allowed value.
      *
      * @return byte
      */
-    public abstract byte getMinValue();
+    public abstract int getMinValue();
 
     /**
      * Maximum allowed value.
      *
      * @return byte
      */
-    public abstract byte getMaxValue();
+    public abstract int getMaxValue();
 
     @Override
     public String toString() {

@@ -12,18 +12,18 @@ import com.github.hypfvieh.bluetooth.wrapper.BluetoothGattService;
  * @author David M.
  *
  */
-public class BluetoothFeatureFactory {
+public class FeatureFactory {
     private static final String PAULMANN_SERVICE_UUID = "0000FFB0";
 
-    public static final BluetoothFeatureFactory INSTANCE = new BluetoothFeatureFactory();
+    public static final FeatureFactory INSTANCE = new FeatureFactory();
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    private BluetoothFeatureFactory() {
+    private FeatureFactory() {
 
     }
 
-    public static BluetoothFeatureFactory getInstance() {
+    public static FeatureFactory getInstance() {
         return INSTANCE;
     }
 
@@ -32,9 +32,9 @@ public class BluetoothFeatureFactory {
      *
      * @param _feature feature to create
      * @param _service service instance
-     * @return concrete class of {@link AbstractBluetoothFeature} or null on error
+     * @return concrete class of {@link AbstractFeature} or null on error
      */
-    public AbstractBluetoothFeature createFeature(FeatureIdent<?> _feature, BluetoothGattService _service) {
+    public AbstractFeature createFeature(FeatureIdent<?> _feature, BluetoothGattService _service) {
         if (_feature == null || _service == null) {
             logger.debug("Either feature ({}) or service ({}) is null", _feature, _service);
             return null;
@@ -52,22 +52,22 @@ public class BluetoothFeatureFactory {
         if (serviceUuid.startsWith(PAULMANN_SERVICE_UUID)
                 && !serviceUuid.equalsIgnoreCase(_feature.getServiceId())) {
             logger.debug("Feature ({}) is not available for the given GattServiceUUID ({})",
-                    _feature.name() + "(ServiceId: " + _feature.getServiceId() + ")", serviceUuid);
+                    _feature.getName() + "(ServiceId: " + _feature.getServiceId() + ")", serviceUuid);
             return null;
         }
 
         for (BluetoothGattCharacteristic bgc : _service.getGattCharacteristics()) {
             String charUuid = bgc.getUuid();
             if (charUuid.equalsIgnoreCase(_feature.getCharId())) {
-                AbstractBluetoothFeature newInstance = newInstance(_feature, bgc);
+                AbstractFeature newInstance = newInstance(_feature, bgc);
                 if (newInstance == null) {
-                    logger.info("Could not create feature {}", _feature.name());
+                    logger.info("Could not create feature {}", _feature.getName());
                 }
                 return newInstance;
             }
         }
         logger.debug("No suitable GATT characteristics found for {}",
-                _feature.name() + "(CharId: " + _feature.getCharId() + ")");
+                _feature.getName() + "(CharId: " + _feature.getCharId() + ")");
         return null;
     }
 
@@ -76,12 +76,12 @@ public class BluetoothFeatureFactory {
      *
      * @param _feature feature to create instance for
      * @param _char GATT characteristics for this feature
-     * @return class extending {@link AbstractBluetoothFeature} or null on error
+     * @return class extending {@link AbstractFeature} or null on error
      */
-    private AbstractBluetoothFeature newInstance(FeatureIdent<?> _feature, BluetoothGattCharacteristic _char) {
+    private AbstractFeature newInstance(FeatureIdent<?> _feature, BluetoothGattCharacteristic _char) {
 
         try {
-            Class<? extends AbstractBluetoothFeature> deviceClass = _feature.getDeviceClass();
+            Class<? extends AbstractFeature> deviceClass = _feature.getDeviceClass();
             if (deviceClass != null) {
                 return deviceClass.getConstructor(BluetoothGattCharacteristic.class).newInstance(_char);
             }

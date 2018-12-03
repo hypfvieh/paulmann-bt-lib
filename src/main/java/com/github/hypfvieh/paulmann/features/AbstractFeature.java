@@ -17,7 +17,7 @@ import com.github.hypfvieh.bluetooth.wrapper.BluetoothGattService;
  *
  * @author David M.
  */
-public abstract class AbstractBluetoothFeature {
+public abstract class AbstractFeature {
 
     // CHECKSTYLE:OFF
     protected final Logger logger = LoggerFactory.getLogger(getClass());
@@ -32,7 +32,7 @@ public abstract class AbstractBluetoothFeature {
     private List<byte[]> cachedWrites = new CopyOnWriteArrayList<>();
     private Timer cacheWriteTimer;
 
-    protected AbstractBluetoothFeature(BluetoothGattCharacteristic _characteristic) {
+    protected AbstractFeature(BluetoothGattCharacteristic _characteristic) {
         characteristic = _characteristic;
         device = _characteristic.getService().getDevice();
         gattService = _characteristic.getService();

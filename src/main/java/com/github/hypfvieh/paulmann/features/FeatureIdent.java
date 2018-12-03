@@ -1,5 +1,9 @@
 package com.github.hypfvieh.paulmann.features;
 
+import static com.github.hypfvieh.paulmann.features.FeatureMode.READ;
+import static com.github.hypfvieh.paulmann.features.FeatureMode.READWRITE;
+import static com.github.hypfvieh.paulmann.features.FeatureMode.WRITE;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,30 +20,60 @@ import com.github.hypfvieh.paulmann.devices.AbstractPaulmannDevice;
  * @author David M.
  *
  */
-public final class FeatureIdent<T extends AbstractBluetoothFeature> {
+public final class FeatureIdent<T extends AbstractFeature> {
+
+    public static final String PAULMANN_SERVICE_ID = "FFB0";
 
     public static final List<FeatureIdent<?>> ALL_FEATURES = new ArrayList<>();
 
-    public static final FeatureIdent<BluetoothAutomotiveFeature> PAULMANN_AUTOMOTIVE_INTERVAL_FEATURE = new FeatureIdent<>(
-            "FFB0", "FFB1", BluetoothAutomotiveFeature.class, "PAULMANN_AUTOMOTIVE_INTERVAL_FEATURE");
-    public static final FeatureIdent<BluetoothRgbFeature> PAULMANN_RGB_FEATURE = new FeatureIdent<>("FFB0", "FFB2",
-            BluetoothRgbFeature.class, "PAULMANN_RGB_FEATURE");
-    public static final FeatureIdent<BluetoothSystemTimeFeature> PAULMANN_SYSTEMTIME_FEATURE = new FeatureIdent<>(
-            "FFB0", "FFB3", BluetoothSystemTimeFeature.class, "PAULMANN_SYSTEMTIME_FEATURE");
-    public static final FeatureIdent<BluetoothTimerOnOffWithOptionsFeature> PAULMANN_ON_OFF_TIMER_WITH_OPTIONS_FEATURE = new FeatureIdent<>(
-            "FFB0", "FFB4", BluetoothTimerOnOffWithOptionsFeature.class, "PAULMANN_ON_OFF_TIMER_WITH_OPTIONS_FEATURE");
-    public static final FeatureIdent<BluetoothColorTemperatureFeature> PAULMANN_COLORTEMP_FEATURE = new FeatureIdent<>(
-            "FFB0", "FFB6", BluetoothColorTemperatureFeature.class, "PAULMANN_COLORTEMP_FEATURE");
-    public static final FeatureIdent<BluetoothOnOffFeature> PAULMANN_ON_OFF_FEATURE = new FeatureIdent<>("FFB0", "FFB7",
-            BluetoothOnOffFeature.class, "PAULMANN_ON_OFF_FEATURE");
-    public static final FeatureIdent<BluetoothBrightnessFeature> PAULMANN_BRIGHTNESS_FEATURE = new FeatureIdent<>(
-            "FFB0", "FFB8", BluetoothBrightnessFeature.class, "PAULMANN_BRIGHTNESS_FEATURE");
-    public static final FeatureIdent<?> PAULMANN_WORKINGMODE_FEATURE = new FeatureIdent<>("FFB0", "FFB9", null,
-            "PAULMANN_WORKINGMODE_FEATURE");
-    public static final FeatureIdent<BluetoothDevicePasswordFeature> PAULMANN_DEVICE_PASSWORD_FEATURE = new FeatureIdent<>(
-            "FFB0", "FFBA", BluetoothDevicePasswordFeature.class, "PAULMANN_DEVICE_PASSWORD_FEATURE");
-    public static final FeatureIdent<BluetoothRemoteControlModeFeature> PAULMANN_REMOTECONTROLMODE_FEATURE = new FeatureIdent<>(
-            "FFB0", "FFBB", BluetoothRemoteControlModeFeature.class, "PAULMANN_REMOTECONTROLMODE_FEATURE");
+    // only for RGB/RGBW and DigitalRGB
+    public static final FeatureIdent<AutoChangeControlFeature> PAULMANN_AUTOCHANGE_CONTROL_FEATURE = new FeatureIdent<>(
+            PAULMANN_SERVICE_ID, "FFB1", AutoChangeControlFeature.class, "PAULMANN_AUTOCHANGE_CONTROL_FEATURE", READWRITE);
+    public static final FeatureIdent<RgbFeature> PAULMANN_RGB_FEATURE = new FeatureIdent<>(PAULMANN_SERVICE_ID, "FFB2",
+            RgbFeature.class, "PAULMANN_RGB_FEATURE", READWRITE);
+
+    // all devices
+    public static final FeatureIdent<SystemTimeFeature> PAULMANN_SYSTEMTIME_FEATURE = new FeatureIdent<>(
+            PAULMANN_SERVICE_ID, "FFB3", SystemTimeFeature.class, "PAULMANN_SYSTEMTIME_FEATURE", READWRITE);
+    public static final FeatureIdent<TimerFeature> PAULMANN_TIMER_FEATURE = new FeatureIdent<>(
+            PAULMANN_SERVICE_ID, "FFB4", TimerFeature.class, "PAULMANN_TIMER_FEATURE", READWRITE);
+
+    public static final FeatureIdent<DeviceNameFeature> PAULMANN_DEVICENAME_FEATURE = new FeatureIdent<>(
+            PAULMANN_SERVICE_ID, "FFB5", DeviceNameFeature.class, "PAULMANN_DEVICENAME_FEATURE", READWRITE);
+
+    // Color temp feature for RGBW Lamps
+    public static final FeatureIdent<ColorTemperatureRGBWFeature> PAULMANN_COLORTEMP_RGBW_FEATURE = new FeatureIdent<>(
+            PAULMANN_SERVICE_ID, "FFB6", ColorTemperatureRGBWFeature.class, "PAULMANN_COLORTEMP_RGBW_FEATURE", READWRITE);
+    // Color temp feature for WC-Lamps
+    public static final FeatureIdent<ColorTemperatureRGBWFeature> PAULMANN_COLORTEMP_WCLAMP_FEATURE = new FeatureIdent<>(
+            PAULMANN_SERVICE_ID, "FFB6", ColorTemperatureRGBWFeature.class, "PAULMANN_COLORTEMP_WCLAMP_FEATURE", READWRITE);
+    // Color temp feature for DigitalRGB Lamps
+    public static final FeatureIdent<ColorTemperatureRGBWFeature> PAULMANN_COLORTEMP_DIGITALRGB_FEATURE = new FeatureIdent<>(
+            PAULMANN_SERVICE_ID, "FFB6", ColorTemperatureRGBWFeature.class, "PAULMANN_COLORTEMP_DIGITALRGB_FEATURE", READWRITE);
+
+    public static final FeatureIdent<OnOffFeature> PAULMANN_ON_OFF_FEATURE = new FeatureIdent<>(PAULMANN_SERVICE_ID, "FFB7",
+            OnOffFeature.class, "PAULMANN_ON_OFF_FEATURE", READWRITE);
+
+    public static final FeatureIdent<BrightnessFeature> PAULMANN_BRIGHTNESS_FEATURE = new FeatureIdent<>(
+            PAULMANN_SERVICE_ID, "FFB8", BrightnessFeature.class, "PAULMANN_BRIGHTNESS_FEATURE", READWRITE);
+    public static final FeatureIdent<?> PAULMANN_WORKINGMODE_FEATURE = new FeatureIdent<>(PAULMANN_SERVICE_ID, "FFB9", null,
+            "PAULMANN_WORKINGMODE_FEATURE", READ);
+
+    public static final FeatureIdent<DevicePasswordFeature> PAULMANN_DEVICE_PASSWORD_FEATURE = new FeatureIdent<>(
+            PAULMANN_SERVICE_ID, "FFBA", DevicePasswordFeature.class, "PAULMANN_DEVICE_PASSWORD_FEATURE", WRITE);
+    public static final FeatureIdent<RemoteControlModeFeature> PAULMANN_REMOTECONTROLMODE_FEATURE = new FeatureIdent<>(
+            PAULMANN_SERVICE_ID, "FFBB", RemoteControlModeFeature.class, "PAULMANN_REMOTECONTROLMODE_FEATURE", READWRITE);
+
+    // DigitalRGB only
+    public static final FeatureIdent<IcCountFeature> PAULMANN_IC_COUNT_FEATURE = new FeatureIdent<>(
+            PAULMANN_SERVICE_ID, "FFBC", IcCountFeature.class, "PAULMANN_IC_COUNT_FEATURE", READWRITE);
+    public static final FeatureIdent<ColorTableFeature> PAULMANN_COLOR_TABLE_FEATURE = new FeatureIdent<>(
+            PAULMANN_SERVICE_ID, "FFBC", ColorTableFeature.class, "PAULMANN_COLOR_TABLE_FEATURE", READWRITE);
+    public static final FeatureIdent<ColorTableIdxFeature> PAULMANN_COLOR_TABLE_IDX_FEATURE = new FeatureIdent<>(
+            PAULMANN_SERVICE_ID, "FFBC", ColorTableIdxFeature.class, "PAULMANN_COLOR_TABLE_IDX_FEATURE", READWRITE);
+    public static final FeatureIdent<ColorTableCntFeature> PAULMANN_COLOR_TABLE_CNT_FEATURE = new FeatureIdent<>(
+            PAULMANN_SERVICE_ID, "FFBC", ColorTableCntFeature.class, "PAULMANN_COLOR_TABLE_CNT_FEATURE", READWRITE);
+
 
     public static final String UUID_BASE = "0000XXXX-0000-1000-8000-00805f9b34fb";
 
@@ -47,16 +81,18 @@ public final class FeatureIdent<T extends AbstractBluetoothFeature> {
     private final String charId;
     private final Class<T> deviceClass;
     private final String name;
+    private final FeatureMode mode;
 
-    private FeatureIdent(String _serviceId, String _charId, Class<T> _deviceClass, String _name) {
+    private FeatureIdent(String _serviceId, String _charId, Class<T> _deviceClass, String _name, FeatureMode _mode) {
         serviceId = createUUID(_serviceId);
         charId = createUUID(_charId);
         deviceClass = _deviceClass;
         name = _name;
+        mode = _mode;
         ALL_FEATURES.add(this);
     }
 
-    public String name() {
+    public String getName() {
         return name;
     }
 
@@ -72,6 +108,10 @@ public final class FeatureIdent<T extends AbstractBluetoothFeature> {
         return charId;
     }
 
+    public FeatureMode getMode() {
+        return mode;
+    }
+
     public Class<T> getDeviceClass() {
         return deviceClass;
     }
@@ -82,6 +122,7 @@ public final class FeatureIdent<T extends AbstractBluetoothFeature> {
         int result = 1;
         result = prime * result + ((charId == null) ? 0 : charId.hashCode());
         result = prime * result + ((deviceClass == null) ? 0 : deviceClass.hashCode());
+        result = prime * result + ((mode == null) ? 0 : mode.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
         result = prime * result + ((serviceId == null) ? 0 : serviceId.hashCode());
         return result;
@@ -113,6 +154,9 @@ public final class FeatureIdent<T extends AbstractBluetoothFeature> {
         } else if (!deviceClass.equals(other.deviceClass)) {
             return false;
         }
+        if (mode != other.mode) {
+            return false;
+        }
         if (name == null) {
             if (other.name != null) {
                 return false;
@@ -129,5 +173,7 @@ public final class FeatureIdent<T extends AbstractBluetoothFeature> {
         }
         return true;
     }
+
+
 
 }

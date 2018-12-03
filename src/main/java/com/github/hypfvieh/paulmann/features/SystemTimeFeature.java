@@ -6,9 +6,9 @@ import java.util.GregorianCalendar;
 
 import com.github.hypfvieh.bluetooth.wrapper.BluetoothGattCharacteristic;
 
-public class BluetoothSystemTimeFeature extends AbstractBluetoothFeature {
+public class SystemTimeFeature extends AbstractFeature {
 
-    public BluetoothSystemTimeFeature(BluetoothGattCharacteristic _char) {
+    public SystemTimeFeature(BluetoothGattCharacteristic _char) {
         super(_char);
     }
 
